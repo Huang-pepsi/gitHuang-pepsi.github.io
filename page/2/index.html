@@ -1,404 +1,215 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Hexo</title><meta name="author" content="John Doe"><meta name="copyright" content="John Doe"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="https://huang-pepsi.github.io/gitHuang-pepsi.github.io/page/2/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://huang-pepsi.github.io/gitHuang-pepsi.github.io/img/butterfly-icon.png">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://huang-pepsi.github.io/gitHuang-pepsi.github.io/img/butterfly-icon.png"><script type="application/ld+json"></script><link rel="shortcut icon" href="/gitHuang-pepsi.github.io/img/favicon.png"><link rel="canonical" href="https://huang-pepsi.github.io/gitHuang-pepsi.github.io/page/2/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/gitHuang-pepsi.github.io/css/index.css?v=5.5.5-b1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
 
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
 
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
 
-
-
-
-
-
-
-
-
-
-
+      const theme = saveToLocal.get('theme')
     
-
-
-
-
-
-
-
-
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-    <meta name="theme-color" content= #93b658 >
-    <title>Hexo </title>
-
-    
-
-    
-    <meta name="description" content=""/>
-
-    
-
-    
-
-    
-
-    
-    
-<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
-    
-<link rel="stylesheet" href="/gitHuang-pepsi.github.io/lib/materialize/dist/css/materialize.min.css">
-
-    
-<link rel="stylesheet" href="/gitHuang-pepsi.github.io/lib/animate.css/animate.min.css">
-
-    
-<link rel="stylesheet" href="/gitHuang-pepsi.github.io/css/post/atom-one-light.css">
-
-    
-<link rel="stylesheet" href="/gitHuang-pepsi.github.io/css/pteris.css">
-
-
-
-    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
         
-<link rel="stylesheet" href="/gitHuang-pepsi.github.io/css/post.css">
-
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
     
-
-    
-
-    
-<meta name="generator" content="Hexo 8.1.1"></head>
-
-<body>
-
-<header>
-    
-        <div class="header-fixed">
-    <nav class="white lime-text lighten-1 " role="navigation">
-        <div class="nav-wrapper container">
-            <div id="logo-container">
-                <a href="/">
-                    
-                    <span class="brand-logo">Hexo</span>
-                </a>
-            </div>
-
-            <ul class="right hide-on-med-and-down">
-                
-            </ul>
-            <a href="#" data-activates="nav-mobile" class="button-collapse">
-                <i class="fa fa-bars green-text"></i></a>
-        </div>
-    </nav>
-</div>
-
-<ul id="nav-mobile" class="side-nav">
-    
-</ul>
-
-
-
-    
-</header>
-
-<main>
-    
-    <div class="main">
-        
-
-        <div class="container">
-            <div id="posts">
-    
-        <div id="recent-posts">
-            
-                
-
-                <div class="recent-post-item card hoverable">
-                    <div class="card-content">
-                        <h2 class="header">
-                            <a href="/gitHuang-pepsi.github.io/2023/11/12/Qt/QThread用法/">QThread用法</a>
-                        </h2>
-
-                        
-                            <p class="post-date">
-                                <i class="fa fa-calendar"></i>
-                                <time datetime="2023-11-12T05:50:18.000Z">
-                                    2023-11-12
-                                </time>
-                            </p>
-                        
-
-                        <p></p>
-
-                    </div>
-                </div>
-            
-                
-
-                <div class="recent-post-item card hoverable">
-                    <div class="card-content">
-                        <h2 class="header">
-                            <a href="/gitHuang-pepsi.github.io/2023/11/05/Qt/QObject、Qt元对象系统、对象树、属性系统/">QObject、Qt元对象系统、对象树、属性系统</a>
-                        </h2>
-
-                        
-                            <p class="post-date">
-                                <i class="fa fa-calendar"></i>
-                                <time datetime="2023-11-05T14:32:03.000Z">
-                                    2023-11-05
-                                </time>
-                            </p>
-                        
-
-                        <p></p>
-
-                    </div>
-                </div>
-            
-                
-
-                <div class="recent-post-item card hoverable">
-                    <div class="card-content">
-                        <h2 class="header">
-                            <a href="/gitHuang-pepsi.github.io/2023/11/05/C++/const小结/">const小结</a>
-                        </h2>
-
-                        
-                            <p class="post-date">
-                                <i class="fa fa-calendar"></i>
-                                <time datetime="2023-11-04T23:50:23.000Z">
-                                    2023-11-05
-                                </time>
-                            </p>
-                        
-
-                        <p></p>
-
-                    </div>
-                </div>
-            
-                
-
-                <div class="recent-post-item card hoverable">
-                    <div class="card-content">
-                        <h2 class="header">
-                            <a href="/gitHuang-pepsi.github.io/2023/10/31/代码Review/">代码Review</a>
-                        </h2>
-
-                        
-                            <p class="post-date">
-                                <i class="fa fa-calendar"></i>
-                                <time datetime="2023-10-31T07:49:02.000Z">
-                                    2023-10-31
-                                </time>
-                            </p>
-                        
-
-                        <p></p>
-
-                    </div>
-                </div>
-            
-                
-
-                <div class="recent-post-item card hoverable">
-                    <div class="card-content">
-                        <h2 class="header">
-                            <a href="/gitHuang-pepsi.github.io/2023/10/30/CICD小结/">CICD小结</a>
-                        </h2>
-
-                        
-                            <p class="post-date">
-                                <i class="fa fa-calendar"></i>
-                                <time datetime="2023-10-30T02:57:15.000Z">
-                                    2023-10-30
-                                </time>
-                            </p>
-                        
-
-                        <p></p>
-
-                    </div>
-                </div>
-            
-                
-
-                <div class="recent-post-item card hoverable">
-                    <div class="card-content">
-                        <h2 class="header">
-                            <a href="/gitHuang-pepsi.github.io/2023/10/26/设计模式原则/">设计模式原则</a>
-                        </h2>
-
-                        
-                            <p class="post-date">
-                                <i class="fa fa-calendar"></i>
-                                <time datetime="2023-10-26T09:00:51.000Z">
-                                    2023-10-26
-                                </time>
-                            </p>
-                        
-
-                        <p></p>
-
-                    </div>
-                </div>
-            
-                
-
-                <div class="recent-post-item card hoverable">
-                    <div class="card-content">
-                        <h2 class="header">
-                            <a href="/gitHuang-pepsi.github.io/2023/10/16/Qt/Qt信号与槽/">Qt信号与槽</a>
-                        </h2>
-
-                        
-                            <p class="post-date">
-                                <i class="fa fa-calendar"></i>
-                                <time datetime="2023-10-16T01:34:24.000Z">
-                                    2023-10-16
-                                </time>
-                            </p>
-                        
-
-                        <p></p>
-
-                    </div>
-                </div>
-            
-                
-
-                <div class="recent-post-item card hoverable">
-                    <div class="card-content">
-                        <h2 class="header">
-                            <a href="/gitHuang-pepsi.github.io/2023/09/25/Qt/Qt项目的构建与编译/">Qt项目的构建与编译</a>
-                        </h2>
-
-                        
-                            <p class="post-date">
-                                <i class="fa fa-calendar"></i>
-                                <time datetime="2023-09-25T07:41:22.000Z">
-                                    2023-09-25
-                                </time>
-                            </p>
-                        
-
-                        <p></p>
-
-                    </div>
-                </div>
-            
-                
-
-                <div class="recent-post-item card hoverable">
-                    <div class="card-content">
-                        <h2 class="header">
-                            <a href="/gitHuang-pepsi.github.io/2023/09/20/计算机网络学习小结/">计算机网络学习小结</a>
-                        </h2>
-
-                        
-                            <p class="post-date">
-                                <i class="fa fa-calendar"></i>
-                                <time datetime="2023-09-20T12:47:06.000Z">
-                                    2023-09-20
-                                </time>
-                            </p>
-                        
-
-                        <p></p>
-
-                    </div>
-                </div>
-            
-                
-
-                <div class="recent-post-item card hoverable">
-                    <div class="card-content">
-                        <h2 class="header">
-                            <a href="/gitHuang-pepsi.github.io/2023/09/20/编码知识小结/">编码知识小结</a>
-                        </h2>
-
-                        
-                            <p class="post-date">
-                                <i class="fa fa-calendar"></i>
-                                <time datetime="2023-09-20T12:35:35.000Z">
-                                    2023-09-20
-                                </time>
-                            </p>
-                        
-
-                        <p></p>
-
-                    </div>
-                </div>
-            
-        </div>
-    
-</div>
-            
-
-    <div class="pagination center">
-        <a class="extend prev" rel="prev" href="/gitHuang-pepsi.github.io/">&lt;i class&#x3D;&quot;fa fa-angle-left&quot;&gt;&lt;&#x2F;i&gt;</a><a class="page-number" href="/gitHuang-pepsi.github.io/">1</a><span class="page-number current">2</span><a class="page-number" href="/gitHuang-pepsi.github.io/page/3/">3</a><a class="extend next" rel="next" href="/gitHuang-pepsi.github.io/page/3/">&lt;i class&#x3D;&quot;fa fa-angle-right&quot;&gt;&lt;&#x2F;i&gt;</a>
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/gitHuang-pepsi.github.io/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Hexo',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'home'
+}</script><meta name="generator" content="Hexo 8.1.1"></head><body><div class="page" id="body-wrap"><header class="full_page" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/gitHuang-pepsi.github.io/"><span class="site-name">Hexo</span></a></span><div id="menus"></div></nav><div id="site-info"><h1 id="site-title">Hexo</h1></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts nc" id="recent-posts"><div class="recent-post-items"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/gitHuang-pepsi.github.io/2023/11/12/Qt/QThread%E7%94%A8%E6%B3%95/" title="QThread用法">QThread用法</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-11-12T05:50:18.000Z" title="Created 2023-11-12 13:50:18">2023-11-12</time></span></div><div class="content">QThread使用的两种方法1.moveToThread()——为QObject的公有方法  继承QObject的类可使用该函数，移入新线程，经检测与创建该类的类的线程不一样  2.重写run函数 quit与exit： quit()是一个公共槽函数，可以通过信号-槽机制来触发线程退出。 当您调用quit()时，它会发送一个QThread::finished信号，这会导致线程结束执行并退出。 quit()通常与start()一起使用，以在需要时请求线程退出。  exit()用于立即终止线程的执行，不等待线程完成当前任务或清理操作，这可能导致资源泄漏或数据不一致。 exit()不会触发QThread::finished信号。 通常情况下，建议使用quit()来请求线程退出，因为它更安全，允许线程完成当前任务和执行必要的清理操作。exit()方法应该只在特殊情况下使用，例如在应用程序退出时，当您确定不需要等待线程完成，或者当您需要强制终止线程时。 </div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/gitHuang-pepsi.github.io/2023/11/05/Qt/QObject%E3%80%81Qt%E5%85%83%E5%AF%B9%E8%B1%A1%E7%B3%BB%E7%BB%9F%E3%80%81%E5%AF%B9%E8%B1%A1%E6%A0%91%E3%80%81%E5%B1%9E%E6%80%A7%E7%B3%BB%E7%BB%9F/" title="QObject、Qt元对象系统、对象树、属性系统">QObject、Qt元对象系统、对象树、属性系统</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-11-05T14:32:03.000Z" title="Created 2023-11-05 22:32:03">2023-11-05</time></span></div><div class="content">1.RTTI机制由于C++是静态类型语言，有关类的信息只在编译期被使用，编译后就不再保留，因此程序运行时无法获取类的信息。这时就需要使用「运行期类型信息」，即RTTI（Run-Time Type Information）。一般拥有程序运行时保存对象类型信息能力的语言，我们就称该语言支持RTTI。C++标准定义了dynamic_cast和typeid两个关键字用于支持RTTI机制。 dynamic_cast的作用是将指向基类对象的指针转换为指向派生类对象的指针，如果转换失败则返回NULL。因此，dynamic_cast唯一的功能就是判断一个对象具有哪些类型。例如有4个类GrandFather、Father、Son和GrandSon，右边的类分别是左边类的派生类。此时有一个类型为GrandFather *的指针p，为了判断p所指对象是否具有Son的类型，可以使用语句Son *son = dynamic_cast&lt;Son*&gt;(p)。如果返回的son不为NULL，则p所指的对象具有Son类型。同理我们也可以得到该对象是否具有Father、GrandSon类型， 但是仅仅知道这...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/gitHuang-pepsi.github.io/2023/11/05/C++/const%E5%B0%8F%E7%BB%93/" title="const小结">const小结</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-11-04T23:50:23.000Z" title="Created 2023-11-05 07:50:23">2023-11-05</time></span></div><div class="content">1.constexpr与const  constexpr修饰的变量允许编译器在编译阶段对其进行验证，检验变量的值是否为常量（如果认定变量为常量表达式，可声明为constexpr）  </div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/gitHuang-pepsi.github.io/2023/10/31/%E4%BB%A3%E7%A0%81Review/" title="代码Review">代码Review</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-10-31T07:49:02.000Z" title="Created 2023-10-31 15:49:02">2023-10-31</time></span></div><div class="content"> 三个层次优化：	1.可读性			 ①变量、方法命名			 ②逻辑是否可被现成库替代			 ③代码做到简洁、自注释	2.健壮性			 ①代码的改动是否会影响到其他模块			 ②参数考虑的范围是否细致	3.可扩展性			 ①是否易于扩展 </div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/gitHuang-pepsi.github.io/2023/10/30/CICD%E5%B0%8F%E7%BB%93/" title="CICD小结">CICD小结</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-10-30T02:57:15.000Z" title="Created 2023-10-30 10:57:15">2023-10-30</time></span></div><div class="content">CI（Continuous Integration持续集成）：持续集成发生在每次提交代码时，在局域网内某个主机搭建持续集成环境，对每次提交的代码进行构建、测试，保证了每次提交的代码的稳定性。CD（Continuous Delivery持续交付）：在持续集成后，通过脚本自动搭建发布环境，生成可持续交付的可执行文件，缩短发布时间。 GitLab的CICD流水线概况：  流水线会运行自动生成的yaml文件 GitLab-runner的应用，在目标机器下载并为项目注册一个runner，配置相关信息并打开runner，提交代码时会自动触发（可手动）流水线开始运行，runner拉取远程仓库代码并进行脚本相关操作，可修改runner的相关配置信息。runner是cicd的关键。  YAML文件：  artifacts关键字用于打包需要的工件    Ruby语法：  def：用于定义方法（函数）。方法是 Ruby 程序中执行特定任务的代码块，可以在程序中多次调用。def 关键字后面通常跟随方法名，然后是方法的主体，用于定义方法的操作和行为。   权限问题：  在目标机器配置环境以及编译可能遇到的...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/gitHuang-pepsi.github.io/2023/10/26/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E5%8E%9F%E5%88%99/" title="设计模式原则">设计模式原则</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-10-26T09:00:51.000Z" title="Created 2023-10-26 17:00:51">2023-10-26</time></span></div><div class="content">1.单一职责原则 2.开闭原则：抽象约束，封装变化例如：矩形和圆类，需要获取它们的面积&#x2F;&#x2F; 面积计算器class AreaCalculator{    double area(Rectangle shape)    {        return shape.getWidth() * shape.getHeight();    }}&#x2F;&#x2F;此设计不利于扩展，可设计一个shape接口类实现计算面积 优化：class shape{	double getArea();}class juxing:public shape 3.里氏替换原则：关于继承 例如：企鹅、鸵鸟和几维鸟从生物学的角度来划分，它们属于鸟类；但从类的继承关系来看，由于它们不能继承“鸟”会飞的功能，所以它们不能定义成“鸟”的子类。同样，由于“气球鱼”不会游泳，所以不能定义成“鱼”的子类；“玩具炮”炸不了敌人，所以不能定义成“炮”的子类等。 对于正方形和长方形最好的做法是再添加一个父类，他们同时继承自这个父类。 对此修正方法是取消原来的继承关系，重新设计它们之间的关系 4.依赖倒置原则例如...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/gitHuang-pepsi.github.io/2023/10/16/Qt/Qt%E4%BF%A1%E5%8F%B7%E4%B8%8E%E6%A7%BD/" title="Qt信号与槽">Qt信号与槽</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-10-16T01:34:24.000Z" title="Created 2023-10-16 09:34:24">2023-10-16</time></span></div><div class="content">1.传统写法SIGNAL（f（int ））SLOT（g（int ））此写法只是简单的字符串匹配，信号和槽的参数类型在字符串上必须是一致的。所以该写法不能适配typdef与namespace以及兼容类型的参数。 2.写法1的扩展 connect为qobject的函数 3.以指针形式指定 此时会有一个问题：若函数发生重载，无法指定唯一的函数解决：使用函数指针简化版：static_cast&lt;(void)(&amp;B::*)(int)&gt;(&amp;B::fun) </div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/gitHuang-pepsi.github.io/2023/09/25/Qt/Qt%E9%A1%B9%E7%9B%AE%E7%9A%84%E6%9E%84%E5%BB%BA%E4%B8%8E%E7%BC%96%E8%AF%91/" title="Qt项目的构建与编译">Qt项目的构建与编译</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-09-25T07:41:22.000Z" title="Created 2023-09-25 15:41:22">2023-09-25</time></span></div><div class="content">pro文件：包含内容为项目整体所依赖的库，项目构建方式，项目包含的头文件和源文件等。 qmake：qmake是Qt公司制造专门生成Qt专用makefile文件的项目管理工具。因为项目编译前会调用Qt专有的moc（The Meta-Object Compiler)编译器和uic（User Interface Complier）编译器对Qt源文件进行预处理，所以需要专门的工具来生成Qt风格的makefile文件。注：执行qmake会更新makefile文件 MinGW：是一套用于Windows平台的自由开源软件开发工具集合。包含GCC编译器用于编译C、C++文件，包含GNU Make工具用于自动化构建过程，还包含调试器（GDB）等。我们使用它的GNU Make工具来对makefile文件进行编译。 makefile文件：当包含多个源文件时，使用gcc命令逐个去编译会导致工作量很大，所以需要一个文件包含编译指令。这个Makefile文件包含了编译、链接等构建规则的信息，make工具根据makefile中的命令进行编译和链接，makefile命令中包含了gcc去编译某个源文件的命令。 m...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/gitHuang-pepsi.github.io/2023/09/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AD%A6%E4%B9%A0%E5%B0%8F%E7%BB%93/" title="计算机网络学习小结">计算机网络学习小结</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-09-20T12:47:06.000Z" title="Created 2023-09-20 20:47:06">2023-09-20</time></span></div><div class="content">TCP&#x2F;IP五层网络自顶向下分别为应用层、传输层、网络层、数据链路层、物理层，也可分为四层（数据链路层与物理层合并为网络接口层） 各层用到的协议： 应用层概念1.基本概念：每个应用层协议都是为了解决某一类应用问题，而问题的解决又必须通过位于不同主机中的多个应用进程之间的通信和协同工作来完成的。应用进程之间的这种通信必须遵循严格的规则。应用层的具体内容就是精确定义这些通信规则。2.应用层协议需定义的内容：● 应用进程交换的报文类型，如请求报文和响应报文。● 各种报文类型的语法，如报文中的各个字段及其详细描述。● 字段的语义，即包含在字段中的信息的含义。● 进程何时、如何发送报文，以及对报文进行响应的规则。 动态主机配置协议DHCP【开始以为这个是IP层的协议，因为涉及到IP。后来才知道这个协议包含的东西比较多，如IP地址、子网掩码以及默认路由器和DNS服务器等，是对其的分配和管理】1.概念【Dynamic Host Configuration Protocol】：提供一种即插即用连网机制，允许一台计算机加入新的网络和获取IP地址而不用手工参与。2.运行机制：采用客户-服务...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/gitHuang-pepsi.github.io/2023/09/20/%E7%BC%96%E7%A0%81%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/" title="编码知识小结">编码知识小结</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-09-20T12:35:35.000Z" title="Created 2023-09-20 20:35:35">2023-09-20</time></span></div><div class="content">开始计算机由美国人发明，只需要输入简单的符号和英文字母就可以。一个字节可以表示256个符号，于是就创造了ASCII编码。ASCII编码大小1字节，第一位为0，所以有7位表示字符，也就是一共表示128个字符。 后来随着计算机的发展，欧洲、亚洲地区不同语言需要不同的字符表示，在原有的ASCII编码基础需要有扩展。各国有自己的编码标准，如中国制定了GB2312编码，日本把日文编到Shift_JIS里，韩国把韩文编到Euc-kr里。 这样就导致了编码标准的冲突，所以需要有统一的编码标准。于是Unicode字符集应运而生，Unicode把所有语言都统一到一套编码里，这样就不会再有乱码问题了。 Unicode字符集可用1~4字节表示一个字符，通常是两个字节。Unicode编码方案有很多，常见的Unicode编码方案包括UTF-8、UTF-16、UTF-32等。 以UTF-8为例，UTF-8是以一个字节为单位对Unicode进行编码。UTF-8（8-bit Unicode Transformation Format）是一种针对Unicode的可变长度字符编码，又称万国码，由Ken Thomps...</div></div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/gitHuang-pepsi.github.io/"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/gitHuang-pepsi.github.io/">1</a><span class="page-number current">2</span><a class="page-number" href="/gitHuang-pepsi.github.io/page/3/#content-inner">3</a><a class="extend next" rel="next" href="/gitHuang-pepsi.github.io/page/3/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/gitHuang-pepsi.github.io/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/gitHuang-pepsi.github.io/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">John Doe</div><div class="author-info-description"></div><div class="site-data"><a href="/gitHuang-pepsi.github.io/archives/"><div class="headline">Articles</div><div class="length-num">26</div></a><a href="/gitHuang-pepsi.github.io/tags/"><div class="headline">Tags</div><div class="length-num">11</div></a><a href="/gitHuang-pepsi.github.io/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/gitHuang-pepsi.github.io/2026/04/27/hello-world/" title="Hello World">Hello World</a><time datetime="2026-04-27T11:03:51.429Z" title="Created 2026-04-27 19:03:51">2026-04-27</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/gitHuang-pepsi.github.io/2025/05/11/%E4%BB%8E%E6%BA%90%E6%96%87%E4%BB%B6%E5%88%B0%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6/" title="从源文件到可执行文件">从源文件到可执行文件</a><time datetime="2025-05-11T01:57:48.000Z" title="Created 2025-05-11 09:57:48">2025-05-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/gitHuang-pepsi.github.io/2025/05/10/Windows%E4%B8%8ELinux%E9%80%9A%E4%BF%A1%E7%9B%B8%E5%85%B3%E5%8D%8F%E8%AE%AE/" title="Windows与Linux通信相关协议">Windows与Linux通信相关协议</a><time datetime="2025-05-10T15:40:32.000Z" title="Created 2025-05-10 23:40:32">2025-05-10</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/gitHuang-pepsi.github.io/2025/05/07/%E9%87%8D%E6%96%B0%E8%BF%9E%E6%8E%A5%E5%88%B0%E5%8D%9A%E5%AE%A2%E5%B9%B6%E9%83%A8%E7%BD%B2%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/" title="博客部署相关问题">博客部署相关问题</a><time datetime="2025-05-07T02:51:01.000Z" title="Created 2025-05-07 10:51:01">2025-05-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/gitHuang-pepsi.github.io/2024/05/12/C++/%E5%88%9D%E5%A7%8B%E5%8C%96%E5%88%97%E8%A1%A8/" title="初始化列表">初始化列表</a><time datetime="2024-05-12T03:26:23.000Z" title="Created 2024-05-12 11:26:23">2024-05-12</time></div></div></div></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>Tags</span></div><div class="card-tag-cloud"><a href="/gitHuang-pepsi.github.io/tags/%E7%96%91%E9%9A%BE%E6%9D%82%E7%97%87/" style="font-size: 1.1em; color: #999">疑难杂症</a> <a href="/gitHuang-pepsi.github.io/tags/%E4%BB%A3%E7%A0%81%E5%85%A8%E6%B5%81%E7%A8%8B/" style="font-size: 1.1em; color: #999">代码全流程</a> <a href="/gitHuang-pepsi.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 1.1em; color: #999">设计模式</a> <a href="/gitHuang-pepsi.github.io/tags/%E7%BC%96%E7%A0%81/" style="font-size: 1.1em; color: #999">编码</a> <a href="/gitHuang-pepsi.github.io/tags/CICD/" style="font-size: 1.1em; color: #999">CICD</a> <a href="/gitHuang-pepsi.github.io/tags/%E5%8D%8F%E8%AE%AE/" style="font-size: 1.1em; color: #999">协议</a> <a href="/gitHuang-pepsi.github.io/tags/Qt/" style="font-size: 1.5em; color: #99a9bf">Qt</a> <a href="/gitHuang-pepsi.github.io/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 1.1em; color: #999">网络</a> <a href="/gitHuang-pepsi.github.io/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 1.1em; color: #999">操作系统</a> <a href="/gitHuang-pepsi.github.io/tags/C/" style="font-size: 1.3em; color: #99a1ac">C++</a> <a href="/gitHuang-pepsi.github.io/tags/%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83/" style="font-size: 1.1em; color: #999">代码规范</a></div></div><div class="card-widget card-archives">
+    <div class="item-headline">
+      <i class="fas fa-archive"></i>
+      <span>Archives</span>
+      
     </div>
-
-
-
-        </div>
-    </div>
-
-</main>
-
-<footer>
-    
-        <footer class="page-footer">
-    <div class="footer-copyright">
-        <div class="container">
-            <div>© 2017 Copyright John Doe
-                <span class="right">
-                powered by
-                <a target="_blank" rel="noopener" href="http://hexo.io">hexo</a>.
-                theme:
-                <a target="_blank" rel="noopener" href="https://github.com/jonashao/hexo-theme-pteris">pteris</a>
-                </span>
-            </div>
-        </div>
-    </div>
-
-    
-</footer>
-
-    
-</footer>
-
-
-    
-<script src="/gitHuang-pepsi.github.io/lib/jquery/dist/jquery.min.js"></script>
-
-
-<script src="/gitHuang-pepsi.github.io/lib/materialize/dist/js/materialize.min.js"></script>
-
-
-<script src="/gitHuang-pepsi.github.io/lib/headroom.js/dist/headroom.min.js"></script>
-
-
-<script src="/gitHuang-pepsi.github.io/lib/headroom.js/dist/jQuery.headroom.min.js"></script>
-
-
-
-
-
-
-
-<script src="/gitHuang-pepsi.github.io/js/pteris.js"></script>
-
-
-
-
-
-
-
-
-
-
-</body>
-</html>
+  
+    <ul class="card-archive-list">
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/gitHuang-pepsi.github.io/archives/2026/04/">
+            <span class="card-archive-list-date">
+              April 2026
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/gitHuang-pepsi.github.io/archives/2025/05/">
+            <span class="card-archive-list-date">
+              May 2025
+            </span>
+            <span class="card-archive-list-count">3</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/gitHuang-pepsi.github.io/archives/2024/05/">
+            <span class="card-archive-list-date">
+              May 2024
+            </span>
+            <span class="card-archive-list-count">3</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/gitHuang-pepsi.github.io/archives/2024/01/">
+            <span class="card-archive-list-date">
+              January 2024
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/gitHuang-pepsi.github.io/archives/2023/11/">
+            <span class="card-archive-list-date">
+              November 2023
+            </span>
+            <span class="card-archive-list-count">5</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/gitHuang-pepsi.github.io/archives/2023/10/">
+            <span class="card-archive-list-date">
+              October 2023
+            </span>
+            <span class="card-archive-list-count">4</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/gitHuang-pepsi.github.io/archives/2023/09/">
+            <span class="card-archive-list-date">
+              September 2023
+            </span>
+            <span class="card-archive-list-count">9</span>
+          </a>
+        </li>
+      
+    </ul>
+  </div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>Website Info</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">Article Count :</div><div class="item-count">26</div></div><div class="webinfo-item"><div class="item-name">Unique Visitors :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">Page Views :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">Last Update :</div><div class="item-count" id="last-push-date" data-lastPushDate="2026-04-28T12:06:02.238Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By John Doe</span><span class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.1</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.5-b1</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/gitHuang-pepsi.github.io/js/utils.js?v=5.5.5-b1"></script><script src="/gitHuang-pepsi.github.io/js/main.js?v=5.5.5-b1"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

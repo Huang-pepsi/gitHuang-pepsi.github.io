@@ -1,205 +1,215 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Archives | Hexo</title><meta name="author" content="John Doe"><meta name="copyright" content="John Doe"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta property="og:type" content="website">
+<meta property="og:title" content="Archives">
+<meta property="og:url" content="https://huang-pepsi.github.io/gitHuang-pepsi.github.io/archives/page/2/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://huang-pepsi.github.io/gitHuang-pepsi.github.io/img/butterfly-icon.png">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://huang-pepsi.github.io/gitHuang-pepsi.github.io/img/butterfly-icon.png"><script type="application/ld+json"></script><link rel="shortcut icon" href="/gitHuang-pepsi.github.io/img/favicon.png"><link rel="canonical" href="https://huang-pepsi.github.io/gitHuang-pepsi.github.io/archives/page/2/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/gitHuang-pepsi.github.io/css/index.css?v=5.5.5-b1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
 
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
 
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
 
+      const theme = saveToLocal.get('theme')
     
-
-
-
-
-
-
-
-
-
-
-
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
     
-
-
-
-
-
-
-
-
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-    <meta name="theme-color" content= #93b658 >
-    <title>Archives | Hexo </title>
-
-    
-
-    
-    <meta name="description" content=""/>
-
-    
-
-    
-
-    
-
-    
-    
-<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
-    
-<link rel="stylesheet" href="/gitHuang-pepsi.github.io/lib/materialize/dist/css/materialize.min.css">
-
-    
-<link rel="stylesheet" href="/gitHuang-pepsi.github.io/lib/animate.css/animate.min.css">
-
-    
-<link rel="stylesheet" href="/gitHuang-pepsi.github.io/css/post/atom-one-light.css">
-
-    
-<link rel="stylesheet" href="/gitHuang-pepsi.github.io/css/pteris.css">
-
-
-
-    
-
-    
-
-    
-<meta name="generator" content="Hexo 8.1.1"></head>
-
-<body>
-
-<header>
-    
-        <div class="header-fixed">
-    <nav class="white lime-text lighten-1 " role="navigation">
-        <div class="nav-wrapper container">
-            <div id="logo-container">
-                <a href="/">
-                    
-                    <span class="brand-logo">Hexo</span>
-                </a>
-            </div>
-
-            <ul class="right hide-on-med-and-down">
-                
-            </ul>
-            <a href="#" data-activates="nav-mobile" class="button-collapse">
-                <i class="fa fa-bars green-text"></i></a>
-        </div>
-    </nav>
-</div>
-
-<ul id="nav-mobile" class="side-nav">
-    
-</ul>
-
-
-
-    
-</header>
-
-<main>
-    
-
-
-    
-    
-    
-
-    <div id="archive">
-        <div class="container">
-            
-                <div id="archive-all" class="center">
-                    <aside>
-                        <h5>Categories</h5>
-                        
-                            <p>None.</p>
-                        
-                    </aside>
-                    <br>
-
-                    <aside>
-                        <h5>Tags</h5>
-                        
-                            <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/gitHuang-pepsi.github.io/tags/C/" rel="tag">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/gitHuang-pepsi.github.io/tags/CICD/" rel="tag">CICD</a></li><li class="tag-list-item"><a class="tag-list-link" href="/gitHuang-pepsi.github.io/tags/Qt/" rel="tag">Qt</a></li><li class="tag-list-item"><a class="tag-list-link" href="/gitHuang-pepsi.github.io/tags/%E4%BB%A3%E7%A0%81%E5%85%A8%E6%B5%81%E7%A8%8B/" rel="tag">代码全流程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/gitHuang-pepsi.github.io/tags/%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83/" rel="tag">代码规范</a></li><li class="tag-list-item"><a class="tag-list-link" href="/gitHuang-pepsi.github.io/tags/%E5%8D%8F%E8%AE%AE/" rel="tag">协议</a></li><li class="tag-list-item"><a class="tag-list-link" href="/gitHuang-pepsi.github.io/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" rel="tag">操作系统</a></li><li class="tag-list-item"><a class="tag-list-link" href="/gitHuang-pepsi.github.io/tags/%E7%96%91%E9%9A%BE%E6%9D%82%E7%97%87/" rel="tag">疑难杂症</a></li><li class="tag-list-item"><a class="tag-list-link" href="/gitHuang-pepsi.github.io/tags/%E7%BC%96%E7%A0%81/" rel="tag">编码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/gitHuang-pepsi.github.io/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/gitHuang-pepsi.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a></li></ul>
-                        
-                    </aside>
-                    <br>
-
-                    <aside>
-                        <h5>Archives</h5>
-                        
-                            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/gitHuang-pepsi.github.io/archives/2026/04/">April 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/gitHuang-pepsi.github.io/archives/2025/05/">May 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/gitHuang-pepsi.github.io/archives/2024/05/">May 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/gitHuang-pepsi.github.io/archives/2024/01/">January 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/gitHuang-pepsi.github.io/archives/2023/11/">November 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/gitHuang-pepsi.github.io/archives/2023/10/">October 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/gitHuang-pepsi.github.io/archives/2023/09/">September 2023</a></li></ul>
-                        
-                    </aside>
-                </div>
-            
-        </div>
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/gitHuang-pepsi.github.io/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Archives',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'archive'
+}</script><meta name="generator" content="Hexo 8.1.1"></head><body><div class="page" id="body-wrap"><header class="not-home-page" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/gitHuang-pepsi.github.io/"><span class="site-name">Hexo</span></a></span><div id="menus"></div></nav><div id="page-site-info"><h1 id="site-title">Archives</h1></div></header><main class="layout" id="content-inner"><div id="archive"><div class="article-sort-title">All Articles - 26</div><div class="article-sort"><div class="article-sort-item year">2023</div><div class="article-sort-item no-article-cover"><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2023-11-12T05:50:18.000Z" title="Created 2023-11-12 13:50:18">2023-11-12</time></div><a class="article-sort-item-title" href="/gitHuang-pepsi.github.io/2023/11/12/Qt/QThread%E7%94%A8%E6%B3%95/" title="QThread用法">QThread用法</a></div></div><div class="article-sort-item no-article-cover"><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2023-11-05T14:32:03.000Z" title="Created 2023-11-05 22:32:03">2023-11-05</time></div><a class="article-sort-item-title" href="/gitHuang-pepsi.github.io/2023/11/05/Qt/QObject%E3%80%81Qt%E5%85%83%E5%AF%B9%E8%B1%A1%E7%B3%BB%E7%BB%9F%E3%80%81%E5%AF%B9%E8%B1%A1%E6%A0%91%E3%80%81%E5%B1%9E%E6%80%A7%E7%B3%BB%E7%BB%9F/" title="QObject、Qt元对象系统、对象树、属性系统">QObject、Qt元对象系统、对象树、属性系统</a></div></div><div class="article-sort-item no-article-cover"><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2023-11-04T23:50:23.000Z" title="Created 2023-11-05 07:50:23">2023-11-05</time></div><a class="article-sort-item-title" href="/gitHuang-pepsi.github.io/2023/11/05/C++/const%E5%B0%8F%E7%BB%93/" title="const小结">const小结</a></div></div><div class="article-sort-item no-article-cover"><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2023-10-31T07:49:02.000Z" title="Created 2023-10-31 15:49:02">2023-10-31</time></div><a class="article-sort-item-title" href="/gitHuang-pepsi.github.io/2023/10/31/%E4%BB%A3%E7%A0%81Review/" title="代码Review">代码Review</a></div></div><div class="article-sort-item no-article-cover"><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2023-10-30T02:57:15.000Z" title="Created 2023-10-30 10:57:15">2023-10-30</time></div><a class="article-sort-item-title" href="/gitHuang-pepsi.github.io/2023/10/30/CICD%E5%B0%8F%E7%BB%93/" title="CICD小结">CICD小结</a></div></div><div class="article-sort-item no-article-cover"><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2023-10-26T09:00:51.000Z" title="Created 2023-10-26 17:00:51">2023-10-26</time></div><a class="article-sort-item-title" href="/gitHuang-pepsi.github.io/2023/10/26/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E5%8E%9F%E5%88%99/" title="设计模式原则">设计模式原则</a></div></div><div class="article-sort-item no-article-cover"><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2023-10-16T01:34:24.000Z" title="Created 2023-10-16 09:34:24">2023-10-16</time></div><a class="article-sort-item-title" href="/gitHuang-pepsi.github.io/2023/10/16/Qt/Qt%E4%BF%A1%E5%8F%B7%E4%B8%8E%E6%A7%BD/" title="Qt信号与槽">Qt信号与槽</a></div></div><div class="article-sort-item no-article-cover"><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2023-09-25T07:41:22.000Z" title="Created 2023-09-25 15:41:22">2023-09-25</time></div><a class="article-sort-item-title" href="/gitHuang-pepsi.github.io/2023/09/25/Qt/Qt%E9%A1%B9%E7%9B%AE%E7%9A%84%E6%9E%84%E5%BB%BA%E4%B8%8E%E7%BC%96%E8%AF%91/" title="Qt项目的构建与编译">Qt项目的构建与编译</a></div></div><div class="article-sort-item no-article-cover"><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2023-09-20T12:47:06.000Z" title="Created 2023-09-20 20:47:06">2023-09-20</time></div><a class="article-sort-item-title" href="/gitHuang-pepsi.github.io/2023/09/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AD%A6%E4%B9%A0%E5%B0%8F%E7%BB%93/" title="计算机网络学习小结">计算机网络学习小结</a></div></div><div class="article-sort-item no-article-cover"><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2023-09-20T12:35:35.000Z" title="Created 2023-09-20 20:35:35">2023-09-20</time></div><a class="article-sort-item-title" href="/gitHuang-pepsi.github.io/2023/09/20/%E7%BC%96%E7%A0%81%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/" title="编码知识小结">编码知识小结</a></div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/gitHuang-pepsi.github.io/archives/"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/gitHuang-pepsi.github.io/archives/">1</a><span class="page-number current">2</span><a class="page-number" href="/gitHuang-pepsi.github.io/archives/page/3/">3</a><a class="extend next" rel="next" href="/gitHuang-pepsi.github.io/archives/page/3/"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/gitHuang-pepsi.github.io/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/gitHuang-pepsi.github.io/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">John Doe</div><div class="author-info-description"></div><div class="site-data"><a href="/gitHuang-pepsi.github.io/archives/"><div class="headline">Articles</div><div class="length-num">26</div></a><a href="/gitHuang-pepsi.github.io/tags/"><div class="headline">Tags</div><div class="length-num">11</div></a><a href="/gitHuang-pepsi.github.io/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/gitHuang-pepsi.github.io/2026/04/27/hello-world/" title="Hello World">Hello World</a><time datetime="2026-04-27T11:03:51.429Z" title="Created 2026-04-27 19:03:51">2026-04-27</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/gitHuang-pepsi.github.io/2025/05/11/%E4%BB%8E%E6%BA%90%E6%96%87%E4%BB%B6%E5%88%B0%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6/" title="从源文件到可执行文件">从源文件到可执行文件</a><time datetime="2025-05-11T01:57:48.000Z" title="Created 2025-05-11 09:57:48">2025-05-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/gitHuang-pepsi.github.io/2025/05/10/Windows%E4%B8%8ELinux%E9%80%9A%E4%BF%A1%E7%9B%B8%E5%85%B3%E5%8D%8F%E8%AE%AE/" title="Windows与Linux通信相关协议">Windows与Linux通信相关协议</a><time datetime="2025-05-10T15:40:32.000Z" title="Created 2025-05-10 23:40:32">2025-05-10</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/gitHuang-pepsi.github.io/2025/05/07/%E9%87%8D%E6%96%B0%E8%BF%9E%E6%8E%A5%E5%88%B0%E5%8D%9A%E5%AE%A2%E5%B9%B6%E9%83%A8%E7%BD%B2%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/" title="博客部署相关问题">博客部署相关问题</a><time datetime="2025-05-07T02:51:01.000Z" title="Created 2025-05-07 10:51:01">2025-05-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/gitHuang-pepsi.github.io/2024/05/12/C++/%E5%88%9D%E5%A7%8B%E5%8C%96%E5%88%97%E8%A1%A8/" title="初始化列表">初始化列表</a><time datetime="2024-05-12T03:26:23.000Z" title="Created 2024-05-12 11:26:23">2024-05-12</time></div></div></div></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>Tags</span></div><div class="card-tag-cloud"><a href="/gitHuang-pepsi.github.io/tags/%E7%96%91%E9%9A%BE%E6%9D%82%E7%97%87/" style="font-size: 1.1em; color: #999">疑难杂症</a> <a href="/gitHuang-pepsi.github.io/tags/%E4%BB%A3%E7%A0%81%E5%85%A8%E6%B5%81%E7%A8%8B/" style="font-size: 1.1em; color: #999">代码全流程</a> <a href="/gitHuang-pepsi.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 1.1em; color: #999">设计模式</a> <a href="/gitHuang-pepsi.github.io/tags/%E7%BC%96%E7%A0%81/" style="font-size: 1.1em; color: #999">编码</a> <a href="/gitHuang-pepsi.github.io/tags/CICD/" style="font-size: 1.1em; color: #999">CICD</a> <a href="/gitHuang-pepsi.github.io/tags/%E5%8D%8F%E8%AE%AE/" style="font-size: 1.1em; color: #999">协议</a> <a href="/gitHuang-pepsi.github.io/tags/Qt/" style="font-size: 1.5em; color: #99a9bf">Qt</a> <a href="/gitHuang-pepsi.github.io/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 1.1em; color: #999">网络</a> <a href="/gitHuang-pepsi.github.io/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 1.1em; color: #999">操作系统</a> <a href="/gitHuang-pepsi.github.io/tags/C/" style="font-size: 1.3em; color: #99a1ac">C++</a> <a href="/gitHuang-pepsi.github.io/tags/%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83/" style="font-size: 1.1em; color: #999">代码规范</a></div></div><div class="card-widget card-archives">
+    <div class="item-headline">
+      <i class="fas fa-archive"></i>
+      <span>Archives</span>
+      
     </div>
-    
-
-    <div class="pagination center">
-        <a class="extend prev" rel="prev" href="/gitHuang-pepsi.github.io/archives/">&lt;i class&#x3D;&quot;fa fa-angle-left&quot;&gt;&lt;&#x2F;i&gt;</a><a class="page-number" href="/gitHuang-pepsi.github.io/archives/">1</a><span class="page-number current">2</span><a class="page-number" href="/gitHuang-pepsi.github.io/archives/page/3/">3</a><a class="extend next" rel="next" href="/gitHuang-pepsi.github.io/archives/page/3/">&lt;i class&#x3D;&quot;fa fa-angle-right&quot;&gt;&lt;&#x2F;i&gt;</a>
-    </div>
-
-
-
-
-</main>
-
-<footer>
-    
-        <footer class="page-footer">
-    <div class="footer-copyright">
-        <div class="container">
-            <div>© 2017 Copyright John Doe
-                <span class="right">
-                powered by
-                <a target="_blank" rel="noopener" href="http://hexo.io">hexo</a>.
-                theme:
-                <a target="_blank" rel="noopener" href="https://github.com/jonashao/hexo-theme-pteris">pteris</a>
-                </span>
-            </div>
-        </div>
-    </div>
-
-    
-</footer>
-
-    
-</footer>
-
-
-    
-<script src="/gitHuang-pepsi.github.io/lib/jquery/dist/jquery.min.js"></script>
-
-
-<script src="/gitHuang-pepsi.github.io/lib/materialize/dist/js/materialize.min.js"></script>
-
-
-<script src="/gitHuang-pepsi.github.io/lib/headroom.js/dist/headroom.min.js"></script>
-
-
-<script src="/gitHuang-pepsi.github.io/lib/headroom.js/dist/jQuery.headroom.min.js"></script>
-
-
-
-
-
-
-
-<script src="/gitHuang-pepsi.github.io/js/pteris.js"></script>
-
-
-
-
-
-
-
-
-
-
-</body>
-</html>
+  
+    <ul class="card-archive-list">
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/gitHuang-pepsi.github.io/archives/2026/04/">
+            <span class="card-archive-list-date">
+              April 2026
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/gitHuang-pepsi.github.io/archives/2025/05/">
+            <span class="card-archive-list-date">
+              May 2025
+            </span>
+            <span class="card-archive-list-count">3</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/gitHuang-pepsi.github.io/archives/2024/05/">
+            <span class="card-archive-list-date">
+              May 2024
+            </span>
+            <span class="card-archive-list-count">3</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/gitHuang-pepsi.github.io/archives/2024/01/">
+            <span class="card-archive-list-date">
+              January 2024
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/gitHuang-pepsi.github.io/archives/2023/11/">
+            <span class="card-archive-list-date">
+              November 2023
+            </span>
+            <span class="card-archive-list-count">5</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/gitHuang-pepsi.github.io/archives/2023/10/">
+            <span class="card-archive-list-date">
+              October 2023
+            </span>
+            <span class="card-archive-list-count">4</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/gitHuang-pepsi.github.io/archives/2023/09/">
+            <span class="card-archive-list-date">
+              September 2023
+            </span>
+            <span class="card-archive-list-count">9</span>
+          </a>
+        </li>
+      
+    </ul>
+  </div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>Website Info</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">Article Count :</div><div class="item-count">26</div></div><div class="webinfo-item"><div class="item-name">Unique Visitors :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">Page Views :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">Last Update :</div><div class="item-count" id="last-push-date" data-lastPushDate="2026-04-28T12:06:02.238Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By John Doe</span><span class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.1</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.5-b1</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/gitHuang-pepsi.github.io/js/utils.js?v=5.5.5-b1"></script><script src="/gitHuang-pepsi.github.io/js/main.js?v=5.5.5-b1"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
