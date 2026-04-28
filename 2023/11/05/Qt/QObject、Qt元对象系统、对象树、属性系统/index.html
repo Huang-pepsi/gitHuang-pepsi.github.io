@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en">
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <meta name="theme-color" content= #93b658 >
+    <title>QObject、Qt元对象系统、对象树、属性系统 | Hexo </title>
+
+    
+        <meta name="keywords" content=","/>
+        
+
+    
+    <meta name="description" content="1.RTTI机制由于C++是静态类型语言，有关类的信息只在编译期被使用，编译后就不再保留，因此程序运行时无法获取类的信息。这时就需要使用「运行期类型信息」，即RTTI（Run-Time Type..."/>
+
+    
+
+    
+
+    
+
+    
+        
+<link rel="stylesheet" href="/gitHuang-pepsi.github.io/lib/social-share.js/dist/css/share.min.css">
+
+    
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/gitHuang-pepsi.github.io/lib/materialize/dist/css/materialize.min.css">
+
+    
+<link rel="stylesheet" href="/gitHuang-pepsi.github.io/lib/animate.css/animate.min.css">
+
+    
+<link rel="stylesheet" href="/gitHuang-pepsi.github.io/css/post/atom-one-light.css">
+
+    
+<link rel="stylesheet" href="/gitHuang-pepsi.github.io/css/pteris.css">
+
+
+
+    
+        
+<link rel="stylesheet" href="/gitHuang-pepsi.github.io/css/post.css">
+
+    
+
+    
+        
+<link rel="stylesheet" href="/gitHuang-pepsi.github.io/lib/lightgallery.js/dist/css/lightgallery.min.css">
+
+    
+
+    
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+<body>
+
+<header>
+    
+        <div class="header-fixed">
+    <nav class="white lime-text lighten-1 " role="navigation">
+        <div class="nav-wrapper container">
+            <div id="logo-container">
+                <a href="/">
+                    
+                    <span class="brand-logo">Hexo</span>
+                </a>
+            </div>
+
+            <ul class="right hide-on-med-and-down">
+                
+            </ul>
+            <a href="#" data-activates="nav-mobile" class="button-collapse">
+                <i class="fa fa-bars green-text"></i></a>
+        </div>
+    </nav>
+</div>
+
+<ul id="nav-mobile" class="side-nav">
+    
+</ul>
+
+
+
+    
+</header>
+
+<main>
+    
+
+    <div id="post">
+        <div class="container">
+            <div id="post-header" class="center">
+                <h1 class="center">QObject、Qt元对象系统、对象树、属性系统</h1>
+                <span class="post-date center">
+                    <i class="fa fa-calendar"></i>
+                    <time datetime="2023-11-05T14:32:03.000Z">
+                        2023-11-05
+                    </time>
+                </span>
+
+                
+
+                
+                    <div class="post-gallery">
+                        <div id="lightgallery">
+                            
+                        </div>
+                    </div>
+                
+            </div>
+
+            <article>
+                <div class="content">
+                    
+    <p>1.RTTI机制<br><strong>由于C++是静态类型语言，有关类的信息只在编译期被使用，编译后就不再保留，因此程序运行时无法获取类的信息。这时就需要使用「运行期类型信息」，即RTTI（Run-Time Type Information）</strong>。一般拥有程序运行时保存对象类型信息能力的语言，我们就称该语言支持RTTI。C++标准定义了dynamic_cast和typeid两个关键字用于支持RTTI机制。</p>
+<p>dynamic_cast的作用是将指向基类对象的指针转换为指向派生类对象的指针，如果转换失败则返回NULL。因此，dynamic_cast唯一的功能就是判断一个对象具有哪些类型。例如有4个类GrandFather、Father、Son和GrandSon，右边的类分别是左边类的派生类。此时有一个类型为<code>GrandFather *</code>的指针p，为了判断p所指对象是否具有Son的类型，可以使用语句<code>Son *son = dynamic_cast&lt;Son*&gt;(p</code>)。如果返回的son不为NULL，则p所指的对象具有Son类型。同理我们也可以得到该对象是否具有Father、GrandSon类型，</p>
+<p>但是仅仅知道这些是不够的。因为有时候某个指针所指的对象行为不正常，如果无法知道所指对象的实际类型，就必须审查该基类及其所有派生类的代码。反过来，如果我们能够知道该对象的实际类型，那就只需要审查该类型的代码即可。typeid的作用是返回类型的名字。因此，typeid的功能就是在dynamic_cast的范围内进一步的确定指针所指对象的实际类型。</p>
+<p>2.元对象系统<br>Meta Object的所有数据和方法都封装在QMetaObject类中，它包含一个Qt类的meta信息，并且提供查询功能。</p>
+<p>元对象系统基于三件事：</p>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://runebook.dev/en/docs/qt/qobject">QObject</a> 类为可以利用元对象系统的对象提供基类。</li>
+<li>类声明的 private 部分内的 <a target="_blank" rel="noopener" href="https://runebook.dev/en/docs/qt/qobject#Q_OBJECT">Q_OBJECT</a> 宏用于启用元对象功能，例如动态属性、信号和插槽。</li>
+<li><a target="_blank" rel="noopener" href="https://runebook.dev/en/docs/qt/moc">元对象编译器</a> （） 为每个 <a target="_blank" rel="noopener" href="https://runebook.dev/en/docs/qt/qobject">QObject</a> 子类提供实现元对象功能所需的代码。<code>moc</code></li>
+</ol>
+<p>meta信息包含：</p>
+<ol>
+<li>信号表（signal table），与对应Qt类相关的系统定义及自定义的signal的名字。</li>
+<li>槽表（slot table），与对应Qt类相关的系统定义及自定义的slot的名字。</li>
+<li>类信息表（class info table），Qt类的类型信息。</li>
+<li>属性表（property table），与对应类中的所有属性的名字。</li>
+<li>指向parent meta object的指针。</li>
+</ol>
+<p>Q_OBJECT宏：<br>moc预处理器将对<strong>头文件</strong>中标记了该宏的类进行处理，不会处理cpp文件中的类似声明，</p>
+<p>3.对象树<br>这个概念非常好理解。因为 QObject 类就有一个私有变量 <code>QList&lt;QObject *&gt;</code>，专门存储这个类的子孙后代们。比如创建一个 QObject 并指定父对象时，就会把自己加入到父对象的 childre() 列表中，也就是 <code>QList&lt;QObject *&gt;</code> 变量中。</p>
+<p>注意setparent细节</p>
+<p>4.属性系统<br>QObject中的子类的私有域中使用Q_PROPERTY宏来声明一个属性</p>
+
+
+                </div>
+            </article>
+
+
+            <div class="post-tags center">
+                
+                    <span class="post-tag chip">
+                        <a href="/gitHuang-pepsi.github.io/tags/Qt/">Qt</a>
+                   </span>
+                
+            </div>
+
+
+            <div class="social-share" data-mobile-sites="weibo,qq,qzone,facebook,twitter">
+                <span id="share-to">Share to</span>
+            </div>
+
+            <div class="post-footer">
+                
+                    <a class="left" href="/gitHuang-pepsi.github.io/2023/11/12/Qt/QThread%E7%94%A8%E6%B3%95/" rel="prev" title="QThread用法">
+                        <i class="fa fa-arrow-circle-left fa-3x" aria-hidden="true"></i>
+                        <span>  QThread用法</span>
+                    </a>
+                
+                
+                    <a class="right" href="/gitHuang-pepsi.github.io/2023/11/05/C++/const%E5%B0%8F%E7%BB%93/" rel="next" title="const小结">
+                        const小结<i
+                                class="fa fa-arrow-circle-right fa-3x "></i>
+                    </a>
+                
+            </div>
+        </div>
+    </div>
+
+
+</main>
+
+<footer>
+    
+        <footer class="page-footer">
+    <div class="footer-copyright">
+        <div class="container">
+            <div>© 2017 Copyright John Doe
+                <span class="right">
+                powered by
+                <a target="_blank" rel="noopener" href="http://hexo.io">hexo</a>.
+                theme:
+                <a target="_blank" rel="noopener" href="https://github.com/jonashao/hexo-theme-pteris">pteris</a>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    
+</footer>
+
+    
+</footer>
+
+
+    
+<script src="/gitHuang-pepsi.github.io/lib/jquery/dist/jquery.min.js"></script>
+
+
+<script src="/gitHuang-pepsi.github.io/lib/materialize/dist/js/materialize.min.js"></script>
+
+
+<script src="/gitHuang-pepsi.github.io/lib/headroom.js/dist/headroom.min.js"></script>
+
+
+<script src="/gitHuang-pepsi.github.io/lib/headroom.js/dist/jQuery.headroom.min.js"></script>
+
+
+
+
+    
+<script src="/gitHuang-pepsi.github.io/lib/social-share.js/dist/js/share.min.js"></script>
+
+
+
+
+
+<script src="/gitHuang-pepsi.github.io/js/pteris.js"></script>
+
+
+
+    
+<script src="/gitHuang-pepsi.github.io/lib/lightgallery.js/dist/js/lightgallery.min.js"></script>
+
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="en">
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <meta name="theme-color" content= #93b658 >
+    <title>计算机网络学习小结 | Hexo </title>
+
+    
+        <meta name="keywords" content=","/>
+        
+
+    
+    <meta name="description" content="TCP&#x2F;IP五层网络自顶向下分别为应用层、传输层、网络层、数据链路层、物理层，也可分为四层（数据链路层与物理层合并为网络接口层）
+各层用到的协议：
+应用层概念1.基本概念：每个应用层协..."/>
+
+    
+
+    
+
+    
+
+    
+        
+<link rel="stylesheet" href="/gitHuang-pepsi.github.io/lib/social-share.js/dist/css/share.min.css">
+
+    
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/gitHuang-pepsi.github.io/lib/materialize/dist/css/materialize.min.css">
+
+    
+<link rel="stylesheet" href="/gitHuang-pepsi.github.io/lib/animate.css/animate.min.css">
+
+    
+<link rel="stylesheet" href="/gitHuang-pepsi.github.io/css/post/atom-one-light.css">
+
+    
+<link rel="stylesheet" href="/gitHuang-pepsi.github.io/css/pteris.css">
+
+
+
+    
+        
+<link rel="stylesheet" href="/gitHuang-pepsi.github.io/css/post.css">
+
+    
+
+    
+        
+<link rel="stylesheet" href="/gitHuang-pepsi.github.io/lib/lightgallery.js/dist/css/lightgallery.min.css">
+
+    
+
+    
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+<body>
+
+<header>
+    
+        <div class="header-fixed">
+    <nav class="white lime-text lighten-1 " role="navigation">
+        <div class="nav-wrapper container">
+            <div id="logo-container">
+                <a href="/">
+                    
+                    <span class="brand-logo">Hexo</span>
+                </a>
+            </div>
+
+            <ul class="right hide-on-med-and-down">
+                
+            </ul>
+            <a href="#" data-activates="nav-mobile" class="button-collapse">
+                <i class="fa fa-bars green-text"></i></a>
+        </div>
+    </nav>
+</div>
+
+<ul id="nav-mobile" class="side-nav">
+    
+</ul>
+
+
+
+    
+</header>
+
+<main>
+    
+
+    <div id="post">
+        <div class="container">
+            <div id="post-header" class="center">
+                <h1 class="center">计算机网络学习小结</h1>
+                <span class="post-date center">
+                    <i class="fa fa-calendar"></i>
+                    <time datetime="2023-09-20T12:47:06.000Z">
+                        2023-09-20
+                    </time>
+                </span>
+
+                
+
+                
+                    <div class="post-gallery">
+                        <div id="lightgallery">
+                            
+                        </div>
+                    </div>
+                
+            </div>
+
+            <article>
+                <div class="content">
+                    
+    <p>TCP&#x2F;IP五层网络自顶向下分别为应用层、传输层、网络层、数据链路层、物理层，也可分为四层（数据链路层与物理层合并为网络接口层）<br><img src="计算机网络学习小结/网络模型.png" width=60%></p>
+<p>各层用到的协议：<br><img src="/gitHuang-pepsi.github.io/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AD%A6%E4%B9%A0%E5%B0%8F%E7%BB%93/%E5%90%84%E5%B1%82%E7%94%A8%E5%88%B0%E7%9A%84%E5%8D%8F%E8%AE%AE.png" alt="网络模型"></p>
+<h1 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h1><h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>1.基本概念：每个应用层协议都是为了解决某一类应用问题，而问题的解决又必须通过位于不同主机中的多个应用进程之间的通信和协同工作来完成的。应用进程之间的这种通信必须遵循严格的规则。应用层的具体内容就是精确定义这些通信规则。<br>2.应用层协议需定义的内容：● 应用进程交换的报文类型，如请求报文和响应报文。● 各种报文类型的语法，如报文中的各个字段及其详细描述。● 字段的语义，即包含在字段中的信息的含义。● 进程何时、如何发送报文，以及对报文进行响应的规则。</p>
+<h2 id="动态主机配置协议DHCP"><a href="#动态主机配置协议DHCP" class="headerlink" title="动态主机配置协议DHCP"></a>动态主机配置协议DHCP</h2><p>【开始以为这个是IP层的协议，因为涉及到IP。后来才知道这个协议包含的东西比较多，如IP地址、子网掩码以及默认路由器和DNS服务器等，是对其的分配和管理】<br>1.概念【Dynamic Host Configuration Protocol】：提供一种即插即用连网机制，允许一台计算机加入新的网络和获取IP地址而不用手工参与。<br>2.运行机制：采用客户-服务器模式，需要IP地址的主机向服务器广播发送报文，服务器先在数据库寻找该主机配置信息，若没有则在IP池选择IP进行分配。<br>3.关于分配的IP地址：该地址是临时的，有他的租用期。<br>4.关于端口：客户使用68，服务器使用67.</p>
+<h2 id="域名系统DNS"><a href="#域名系统DNS" class="headerlink" title="域名系统DNS"></a>域名系统DNS</h2><p>1.概念：DNS (Domain Name System)是因特网使用的命名系统，用来把便于人们使用的机器名字转换为IP地址。DNS是基于UDP协议的。<br>2.为何使用域名：IP地址不便记忆且不直观<br>3.DNS的设计：因特网的域名系统DNS被设计成为一个联机分布式数据库系统，并采用客户-服务器方式。DNS使大多数名字都在本地进行解析，仅少量解析需要在因特网上通信，因此DNS系统的效率很高。由于DNS是分布式系统，即使单个计算机出了故障，也不会妨碍整个DNS系统的正常运行。<br>4.域名空间：<img src="计算机网络学习小结/域名空间.png" width=60%><br>5.增加DNS查询效率：在域名服务器中使用高速缓存用来存放最近查询过的域名以及从何处获得域名映射信息的记录。<br>6.域名查询两种方式：<img src="计算机网络学习小结/域名查询.png" width=60%></p>
+<h2 id="文件传送协议FTP"><a href="#文件传送协议FTP" class="headerlink" title="文件传送协议FTP"></a>文件传送协议FTP</h2><p>1.<strong>背景</strong>：需要将文件从一台主机传送到另一台主机，众多的计算机厂商研制出的文件系统多达数百种，且差别很大。经常遇到的问题是：(1) 计算机存储数据的格式不同。(2) 文件的目录结构和文件命名的规定不同。(3) 对于相同的文件存取功能，操作系统使用的命令不同。(4) 访问控制方法不同。<br>2.<strong>主要功能</strong>：减少或消除在不同操作系统下处理文件的不兼容性<br>3.<strong>使用传输层协议</strong>：TCP<br>4.<strong>原理</strong>：FTP主要服务于服务器与客户端之间进行文件传输，使用两个并行的TCP连接来传输文件，分别是控制连接和数据连接。控制连接用来传输命令等参数，用于在两主机之间传输控制信息，如用户标识、口令、改变远程目录的命令以及“存放（put）”和“获取（get）”文件的命令。数据连接用来传输文件。<br><img src="计算机网络学习小结/tcp原理.png" width=60%><br>5.<strong>传输模式</strong>：ASCII模式（文本）或二进制模式（音视频）<br>6.<strong>建立连接的过程</strong>：当用户主机与远程主机开始一个FTP会话时，FTP的客户（用户）端首先在服务器21号端口与服务器（远程主机）端发起一个用于控制的TCP连接。FTP的客户端也通过该控制连接发送用户的标识和口令，发送改变远程目录的命令。当FTP的服务器端从该连接上收到一个文件传输的命令后，就发起一个到客户端的TCP数据连接。FTP在该数据连接上准确地传送一个文件，然后关闭该连接。在同一个会话期间，如果用户还需要传输另一个文件，FTP则打开另一个数据连接。因而对FTP传输而言，控制连接贯穿了整个用户会话期间，但是对会话中的每一次文件传输都需要建立一个新的数据连接（即数据连接是非持续的）。<br>FTP服务器必须在整个会话期间保留用户的状态（state）。特别是，服务器必须把特定的用户账户与控制连接联系起来，随着用户在远程目录树上徘徊，服务器必须追踪用户在远程目录树上的当前位置。对每个进行中的用户会话的状态信息进行追踪，大大限制了FTP同时维持的会话总数。</p>
+<h2 id="超文本传输协议HTTP"><a href="#超文本传输协议HTTP" class="headerlink" title="超文本传输协议HTTP"></a>超文本传输协议HTTP</h2><p>1.<strong>统一资源定位符URL</strong>：URL是用来表示从因特网上得到的资源位置和访问这些资源的方法。URL相当于一个文件名在网络范围的扩展。因此，URL是与因特网相连的机器上的任何可访问对象的一个指针。<br>	URL一般形式：&lt;协议&gt;:&#x2F;&#x2F;&lt;主机&gt;:&lt;端口&gt;&#x2F;&lt;路径&gt;<br>	其中协议主要为http、ftp和https，主机为域名，端口和路径可忽略。HTTP 的标准端口是 80，HTTPS 的标准端口是 443。<br>	路径指定了服务器上资源的位置，通常是一个文件路径或目录路径，例如 &#x2F;images&#x2F;pic.jpg。<br><img src="计算机网络学习小结/URL.png" width=60%><br>2.<strong>HTTP干了什么</strong><br>	HTTP协议定义了浏览器（即万维网客户进程）怎样向万维网服务器请求万维网文档，以及服务器怎样把文档传送给浏览器。<br>3.<strong>HTTP请求报文的一些方法</strong>：<img src="计算机网络学习小结/http请求报文.png" width=60%><br>4.<strong>代理服务器</strong><br>&emsp;&emsp;1.概念：代理服务器（Proxy Server）是一种位于客户端和目标服务器之间的中间服务器，充当两者之间的”中介”。它的核心作用是转发客户端请求并返回服务器响应，同时可能提供额外的功能（如缓存、过滤、匿名性等）<br>&emsp;&emsp;2.功能：<br>&emsp;&emsp;&emsp;&emsp;1.隐私保护：隐藏客户端真实IP地址（如访问国外网站时隐藏地理位置）。<br>&emsp;&emsp;&emsp;&emsp;2.访问控制：企业&#x2F;学校网络限制访问特定网站（如屏蔽社交媒体）。<br>&emsp;&emsp;&emsp;&emsp;3.性能优化：<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;缓存：存储常用资源（如网页、视频），加快后续访问速度。<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;压缩：减少传输数据量。<br>&emsp;&emsp;4.安全防护：过滤恶意流量（如DDoS攻击）、屏蔽危险网站。<br>&emsp;&emsp;5.负载均衡：反向代理将请求分发到多台服务器，避免单点过载（如大型电商网站）。<br>5.<strong>HTTP报文结构</strong><br>6.<strong>基本的 HTTP 使用流程</strong><br>&emsp;&emsp;1. <strong>建立连接</strong>：<br>		- 客户端（通常是浏览器）向服务器发送一个 HTTP 请求，以请求特定的资源。请求中包含了目标资源的 URL、请求方法（如 GET、POST）、头部信息等。<br>		- 如果服务器接受请求并能够提供资源，它将建立一个 TCP 连接以响应客户端的请求。<br>&emsp;&emsp;2. <strong>服务器处理请求</strong>：<br>		- 服务器接收到客户端的请求后，根据请求中的 URL、请求方法和头部信息来确定如何处理请求。<br>		- 服务器可能需要查询数据库、执行应用程序或读取文件以生成响应。<br>&emsp;&emsp;3. <strong>服务器发送响应</strong>：<br>		- 一旦服务器生成了响应，它将响应数据包装成 HTTP 响应消息，包括响应状态码、头部信息和响应正文（资源数据）。<br>		- 服务器将响应消息发送回客户端，使用之前建立的 TCP 连接。<br>&emsp;&emsp;4. <strong>客户端接收响应</strong>：<br>		- 客户端接收到服务器的响应后，首先检查响应状态码。状态码表示了请求的成功或失败，以及失败的原因。<br>		- 如果状态码指示成功（如 200 OK），客户端将处理响应，例如显示网页内容或保存文件。<br>		- 如果状态码指示失败（如 404 Not Found），客户端可能会显示错误页面或采取其他适当的操作。<br>&emsp;&emsp;5. <strong>关闭连接</strong>：<br>		- 在请求和响应之后，TCP 连接可以关闭，以释放资源。在某些情况下，HTTP 1.1 可以使用持久连接来重复使用连接以减少延迟。<br>&emsp;&emsp;6. <strong>可选的持久连接</strong>：<br>		- 在 HTTP 1.1 中，可选的持久连接允许客户端和服务器重复使用相同的连接来发送多个请求和响应，从而提高性能。<br>7.<strong>超文本标记语言HTML</strong>：构建页面的骨架，静态语言<br>8.<strong>动态万维网文档</strong><br>9.<strong>VPN</strong><br>&emsp;&emsp;1.概念：VPN的英文全称是“Virtual Private Network”，翻译过来就是“虚拟专用网络”。虚拟专用网络(VPN)的主要功能是：在公用网络上建立专用网络，进行加密通讯。<br>&emsp;&emsp;2.功能：<br>&emsp;&emsp;&emsp;&emsp;1.匿名：通过vpn服务器访问其他网络，会隐藏主机的ip等信息<br>&emsp;&emsp;&emsp;&emsp;2.安全：使用加密通信<br>&emsp;&emsp;&emsp;&emsp;3.突破地域限制</p>
+<h2 id="简单邮件传输协议SMTP"><a href="#简单邮件传输协议SMTP" class="headerlink" title="简单邮件传输协议SMTP"></a>简单邮件传输协议SMTP</h2><p>1.特点：异步通讯，TCP传输，只有发收两个服务器，不存在中间服务器<br>2.邮件发送过程：发送方A从用户代理开始，将邮件传输到A的邮件服务器，邮件服务器再传输到接收方B的邮件服务器，B再在其用户代理读取邮件。<br>warning：若B的邮件服务器出现故障，则A的邮件服务器会受到故障报告且每隔一段时间重新发送邮件，若几天后仍不成功发送，则服务器会删除A的报文并以电子邮件形式通知A。</p>
+<h2 id="网络应用通讯"><a href="#网络应用通讯" class="headerlink" title="网络应用通讯"></a>网络应用通讯</h2><p>1.套接字：套接字（Socket）是计算机网络通信中的一种编程接口，用于在不同计算机之间传输数据。它允许计算机上的不同进程或应用程序通过网络进行通信。套接字提供了一种标准化的方法，使不同操作系统和编程语言之间能够进行网络通信。<br><img src="/gitHuang-pepsi.github.io/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AD%A6%E4%B9%A0%E5%B0%8F%E7%BB%93/%E5%A5%97%E6%8E%A5%E5%AD%97.png" alt="套接字"><br>(灰色表示未填写，协议族为TCP&#x2F;IP协议，服务为TCP)</p>
+<h1 id="传输层"><a href="#传输层" class="headerlink" title="传输层"></a>传输层</h1><h2 id="概念-1"><a href="#概念-1" class="headerlink" title="概念"></a>概念</h2><p>传输层提供两个主机进程间数据传输服务，主要有TCP和UDP两种协议<br>传输层提供的服务有：<br>		- 数据传输。<br>		- 错误检查。<br>		- 可靠数据传输。数据的正确性和有序性。<br>		- 拥塞控制。</p>
+<h2 id="传输层工作机制"><a href="#传输层工作机制" class="headerlink" title="传输层工作机制"></a>传输层工作机制</h2><ol>
+<li>   发送数据的过程：<br>  - 客户端进程组装应用层报文<br>  - 进程根据传输层协议，创建相应的 Socket。<br>  - 进程将应用层消息传给 Socket。<br>  - Socket 将应用层报文（Message）分成多份，加上传输层报文头。封装成传输层报文段（Segment）传递给网络层。</li>
+<li>   接收数据的过程：<br>  - 网络层将组装好的报文段传给传输层。<br>  - 传输层接收到报文段，根据报文段的头部信息中的目标端口，将报文段传给指定的 Socket。<br>  - Socket 收集到所有的报文段后，将报文段转换为应用层报文。<br>  - 进程读取 Socket 中的应用层报文。</li>
+</ol>
+<h2 id="UDP协议（User-Datagram-Protocol）"><a href="#UDP协议（User-Datagram-Protocol）" class="headerlink" title="UDP协议（User Datagram Protocol）"></a>UDP协议（User Datagram Protocol）</h2><ol>
+<li>   UDP运用场景：  <img src="计算机网络学习小结/UDP运用场景.png" width=60%></li>
+<li>   UDP报文段结构：  <img src="计算机网络学习小结/UDP报文段结构.png" width=60%>
+  相比TCP的首部20字节，UDP只有8字节</li>
+<li>UDP和IP数据报的区别：</li>
+</ol>
+<pre><code>UDP计算检验和的方法和计算IP数据报首部检验和的方法相似。但不同的是：IP数据报的检验和只检验IP数据报的首部，但UDP的检验和是把首部和数据部分一起都检验。
+</code></pre>
+<h2 id="TCP协议（Transmission-Control-Protocol）"><a href="#TCP协议（Transmission-Control-Protocol）" class="headerlink" title="TCP协议（Transmission Control Protocol）"></a>TCP协议（Transmission Control Protocol）</h2><p>1.TCP运用场景：<br><img src="/gitHuang-pepsi.github.io/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AD%A6%E4%B9%A0%E5%B0%8F%E7%BB%93/tcp%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF.png" alt="tcp应用场景"><br>2.TCP 协议有以下特点：<br>		- 可靠的数据传输<br>		- 面向连接<br>3.TCP报文段结构：<br><img src="计算机网络学习小结/TCP报文段结构.png" width=60%><br>4.TCP的连接机制（三次握手）：<br>		第一次握手（SYN）：<br>		    - 客户端向服务器发送一个TCP数据包，其中包含了一个SYN（同步）标志位和一个随机生成的初始序列号（ISN）。这表明客户端希望建立连接。<br>		第二次握手（SYN-ACK）：<br>		    - 服务器收到客户端的SYN请求后，如果同意建立连接，会回应一个TCP数据包，其中包含SYN和ACK（确认）标志位。服务器也会生成一个随机的初始序列号，并将客户端的初始序列号加一，作为确认号。这表明服务器愿意建立连接，并且确认了客户端的请求。<br>		第三次握手（ACK）：<br>		    - 客户端接收到服务器的响应后，会发送一个包含ACK标志位的TCP数据包，表示对服务器的确认。客户端的序列号也会加一，并且确认号设置为服务器的初始序列号加一。这样，双方的连接就建立起来了。<br>5.TCP断开连接机制（四次挥手）：<br>	   第一次挥手（FIN，客户端发送）：<br>		    - 客户端向服务器发送一个TCP数据包，其中包含FIN（结束）标志位，表示客户端不再发送数据，但仍然愿意接收数据。客户端希望关闭输出流，但保持输入流打开，以确保服务器仍可以向客户端发送数据。<br>	   第二次挥手（ACK，服务器发送）：<br>		    - 服务器接收到客户端的FIN后，会发送一个TCP数据包，其中包含一个ACK标志位，以确认收到客户端的关闭请求。此时，服务器仍然可以向客户端发送数据。<br>	   第三次挥手（FIN，服务器发送）：<br>		    - 当服务器准备好关闭输出流时，它会向客户端发送一个TCP数据包，其中包含FIN标志位，表示服务器不再发送数据。这个步骤通知客户端服务器已经完成了数据传输。<br>	   第四次挥手（ACK，客户端发送）：<br>		    - 客户端接收到服务器的FIN后，会发送一个TCP数据包，其中包含ACK标志位，以确认收到服务器的关闭请求。此时，客户端和服务器都完成了关闭操作，连接被完全关闭。<br>6.挥手会出现的问题：<br>7.可靠数据传输的条件：<br>			- 无数据缺失<br>			- 无数据错误<br>			- 无数据重复<br>			- 数据传输顺序正确<br>8.TCP如何控制流量：<br>			TCP流控制是一种用于调整TCP连接中数据的传输速率的机制，以确保发送方不会过快地向接收方发送数据，从而防止网络拥塞和数据丢失。TCP流控制使用滑动窗口机制来实现，该窗口大小根据接收方的能力来动态调整。<br>			- 滑动窗口机制<br>				TCP连接的每一端都会维护一个接收窗口（Receive Window）的大小。这个窗口表示了接收方可以接受的未确认数据的最大数量。发送方必须确保发送的数据不会超过接收窗口的大小。<br>			- 接收方通知滑动窗口的大小<br>				接收方会周期性地通告其当前接收窗口的大小给发送方。这个信息包含在TCP报文的窗口字段中。接收方可以根据其可用的缓冲区空间来调整窗口大小。<br>			- 发送方控制发送速率<br>				发送方根据接收方通告的窗口大小来控制发送速率。发送方会发送数据，但不会发送超过窗口大小的数据量。如果窗口变小，发送方会减慢发送速率以避免发送过多数据。<br>			- 动态调整窗口大小<br>				接收方可以根据其缓冲区的可用空间来动态调整窗口大小。如果接收方的缓冲区充足，窗口可以增大，允许更多数据的传输。如果缓冲区即将满了，窗口可以减小，以避免数据的溢出和丢失。<br>9.拥塞控制：		<br>			拥塞控制是TCP协议中的一项关键机制，用于监测网络中的拥塞情况并采取措施来避免或减轻拥塞。拥塞控制的主要目标是防止过多的数据包在网络中造成丢失，从而维持网络的稳定性和性能。</p>
+<h1 id="网络层-Network-Layer"><a href="#网络层-Network-Layer" class="headerlink" title="网络层(Network Layer)"></a>网络层(Network Layer)</h1><h2 id="概念-2"><a href="#概念-2" class="headerlink" title="概念"></a>概念</h2><p>网络层提供两个主机之间进行通讯的服务，它是通过主机绑定的，一个主机在网络中通过IP地址进行标识，同一个主机可能有多个IP，一个IP只能绑定唯一的主机。<br>网络层数据交换单位：<strong>报文</strong></p>
+<h2 id="IP"><a href="#IP" class="headerlink" title="IP"></a>IP</h2><p>1.IP概念：IP地址就是给因特网上的每一个主机（或路由器）的每一个接口（网卡）分配一个在全世界范围内唯一的32位的标识符。IP地址并不仅仅指明一个主机，而是还指明了主机所连接到的网络。<br>2.IP地址的种类：<br><img src="计算机网络学习小结/ip地址种类.png" width=60%><br>	 ABC类为常用的IP地址，其中A类主要分配给政府机关使用，B类地址主要给大中型企业使用，C类地址主要给个人使用。这三种是主要的。<br>	 A类范围：1.0.0.1—126.155.255.254<br>	 B类范围：128.0.0.1—191.255.255.254<br>	 C类范围：192.0.0.1—223.255.255.254<br>	 D类范围（主要用于多播通信）：224.0.0.1—239.255.255.254<br>3.IP数据报格式：<br><img src="计算机网络学习小结/IP数据报格式.png" width=60%><br>4.IPv4与IPv6：<br>	概念：IPv4与IPv6是互联网上使用的两种不同的网络协议，用于在全球范围内标识和定位计算机和其他设备。<br>	长度：IPv4为32位，IPv6为128位。<br>	地址表示：IPv4地址通常以四个十进制数字（0-255）表示，用点号分隔。例如，192.168.1.1。IPv6地址以八组四位的十六进制数字表示，用冒号分隔，可以省略前导零，每一位可以表示任意16进制数。例如，2001:db8:85a3:0:0:8a2e:370:7334。
+	</p>
+<h2 id="网络层包含的协议"><a href="#网络层包含的协议" class="headerlink" title="网络层包含的协议"></a>网络层包含的协议</h2><p>1.<strong>IP协议</strong>（Internet Protocol，因特网互联协议）：IP协议提供了一种不可靠，无连接的数据报交付服务。 网络层不提供服务质量的承诺，不保证分组交付的时限，所传送的分组可能出错、丢失、重复和失序。进程之间的通信的可靠性由运输层负责。<br>	特点：<br>		<strong>不可靠</strong>: IP数据报不保证能成功的到达目的地，如果出现错误则选择丢弃该数据。<br>		<strong>无连接</strong>: IP不提供任何后续数据报的状态信息，每个数据报处理都是独立的。如果一个信源发送了连续的两个数据报，每个数据报选择独立的路由，两个数据可能不同时到达。IP通信双方都不长久地维持对方的任何信息。这样上层协议每次发送数据的时候，都必须明确指定对方的IP地址。</p>
+<p>2.<strong>ARP协议</strong>（Address Resolution Protocol，地址解析协议）：地址解析协议ARP把IP地址解析为硬件地址，它解决同一个局域网上的主机或路由器的IP地址和硬件地址的映射问题。ARP的高速缓存可以大大减少网络上的通信量。<br>ARP表：<img src="计算机网络学习小结/ARP表.png" width=60%></p>
+<p>3.<strong>ICMP协议</strong>（Internet Control Message Protocol，因特网控制报文协议）：ICMP允许主机或路由器报告差错情况和提供有关异常情况的报告。报文种类有ICMP差错报告报文和ICMP询问报文。ICMP报文封装在IP数据报当中。<br><img src="计算机网络学习小结/ICPM协议.png" width=60%><br>应用举例：①主机间PING信号测试网络连通性。PING使用了ICMP回送请求与回送回答报文。PING是应用层直接使用网络层ICMP的一个例子。它没有通过运输层的TCP或UDP。②Traceroute应用：可以探测IP数据报在网络中走过的路径。</p>
+<p>4.<strong>RARP协议</strong>（Reverse Address Resolution Protocol，逆地址解析协议）</p>
+<h2 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h2><p>1.路由概念：路由是计算机网络中的重要概念，它指的是确定数据包从<strong>源</strong>到<strong>目的地</strong>的路径的过程，以确保它能够在网络中正确传输。在网络中，数据包需要经过多个中间节点或设备，如<strong>路由器</strong>和<strong>交换机</strong>，才能到达其最终的目的地。路由的主要任务是决定数据包的<strong>下一跳</strong>，即它将通过哪个网络接口或链路继续传输。</p>
+<p>2.决策过程：路由器是网络中的主要路由设备，它们根据预定义的路由表和路由算法来决定数据包的下一跳。路由表包含了网络拓扑信息，指示了如何到达各个目的地网络。</p>
+<p>3.目的地地址：数据包中通常包含了目的地设备或网络的IP地址，路由器使用这个地址来确定下一跳。它会检查目的地地址，并根据路由表中的信息选择正确的输出接口或链路。</p>
+<p>4.动态路由和静态路由：路由可以是静态的，也可以是动态的。静态路由是由网络管理员手动配置的，而动态路由是使用路由协议自动学习的，它可以根据网络拓扑的变化进行调整。</p>
+<p>5.路由协议： 路由器使用路由协议来交换路由信息，并决定最佳路径。一些常见的路由协议包括RIP（Routing Information Protocol）、OSPF（Open Shortest Path First）、BGP（Border Gateway Protocol）等。</p>
+<p>6.跳数和成本： 路由器通常使用跳数或成本来评估路径的优劣。一般情况下，路径的跳数越少或成本越低，就越被认为是更好的路径。</p>
+<p>7.分层路由： 计算机网络通常采用分层路由的方法，将网络划分为多个子网，每个子网使用独立的路由策略。这有助于提高网络的性能和可管理性。</p>
+<p>8.路由器</p>
+<h1 id="数据链路层"><a href="#数据链路层" class="headerlink" title="数据链路层"></a>数据链路层</h1><h2 id="概念-3"><a href="#概念-3" class="headerlink" title="概念"></a>概念</h2><ul>
+<li>数据链路层研究的是<strong>局域网</strong>内主机与主机的通讯。</li>
+<li>数据链路层的协议数据单元——<strong>帧</strong>，将上层数据封装成帧，将下层数据帧解封装。</li>
+</ul>
+<h2 id="三个基本问题"><a href="#三个基本问题" class="headerlink" title="三个基本问题"></a>三个基本问题</h2><p>1.<strong>封装成帧</strong>：规定特殊字符作为帧的开始和结束<br>2.<strong>透明传输</strong>：如果数据中碰巧出现了和帧定界符一样的比特组合时，就要采取有效的措施来解决这个问题<br>3.<strong>差错检测</strong>：让发送节点在帧中包括差错检测比特，对接收端收到的帧进行检测，并立即丢弃有差错的帧</p>
+<h2 id="数据链路层协议"><a href="#数据链路层协议" class="headerlink" title="数据链路层协议"></a>数据链路层协议</h2><p><strong>PPP协议</strong>：是一种用于在计算机之间建立连接的网络通信协议。它通常用于拨号连接，例如在通过电话线或其他通信线路连接到互联网服务提供商（ISP）时。<br><strong>最大传输单元MTU</strong>：MTU是数据链路层的帧可以载荷的数据部分的最大长度，而不是帧的总长度。<br><strong>MAC地址</strong>：适配器（网络接口）具有的链路层地址，仅在本地网络段有意义，不跨路由器传播。</p>
+<h2 id="交换机"><a href="#交换机" class="headerlink" title="交换机"></a>交换机</h2><ul>
+<li>交换机会维护一个MAC地址表，记录着每台计算机的MAC地址和与其对应的交换机端口。</li>
+<li>如果交换机在MAC地址表中找不到目标MAC地址的记录，它将数据包广播到所有连接的端口，以确保数据包能够到达目标计算机。一旦目标计算机响应了广播数据包，交换机就会学习到该计算机的MAC地址并将其添加到MAC地址表中，以后的通信就只会定向传输。</li>
+</ul>
+<h1 id="物理层"><a href="#物理层" class="headerlink" title="物理层"></a>物理层</h1><h2 id="概念-4"><a href="#概念-4" class="headerlink" title="概念"></a>概念</h2><ul>
+<li>解决在主机间传输比特流问题。</li>
+<li>数据在通信线路（传输媒体）上的传输方式一般都是串行传输。</li>
+<li>物理连接方式：一对一，一对多，多对多</li>
+<li>线路种类：架空明线、双绞线、对称电缆、同轴电缆、光缆、无线</li>
+</ul>
+<h3 id="通信知识"><a href="#通信知识" class="headerlink" title="通信知识"></a>通信知识</h3><ul>
+<li>单工通信（单向）、半双工（双向不同时）、全双工（双向同时）</li>
+<li>常见编码方式：归零制、曼彻斯特、差分曼彻斯特</li>
+</ul>
+
+
+                </div>
+            </article>
+
+
+            <div class="post-tags center">
+                
+                    <span class="post-tag chip">
+                        <a href="/gitHuang-pepsi.github.io/tags/%E7%BD%91%E7%BB%9C/">网络</a>
+                   </span>
+                
+            </div>
+
+
+            <div class="social-share" data-mobile-sites="weibo,qq,qzone,facebook,twitter">
+                <span id="share-to">Share to</span>
+            </div>
+
+            <div class="post-footer">
+                
+                    <a class="left" href="/gitHuang-pepsi.github.io/2023/09/25/Qt/Qt%E9%A1%B9%E7%9B%AE%E7%9A%84%E6%9E%84%E5%BB%BA%E4%B8%8E%E7%BC%96%E8%AF%91/" rel="prev" title="Qt项目的构建与编译">
+                        <i class="fa fa-arrow-circle-left fa-3x" aria-hidden="true"></i>
+                        <span>  Qt项目的构建与编译</span>
+                    </a>
+                
+                
+                    <a class="right" href="/gitHuang-pepsi.github.io/2023/09/20/%E7%BC%96%E7%A0%81%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/" rel="next" title="编码知识小结">
+                        编码知识小结<i
+                                class="fa fa-arrow-circle-right fa-3x "></i>
+                    </a>
+                
+            </div>
+        </div>
+    </div>
+
+
+</main>
+
+<footer>
+    
+        <footer class="page-footer">
+    <div class="footer-copyright">
+        <div class="container">
+            <div>© 2017 Copyright John Doe
+                <span class="right">
+                powered by
+                <a target="_blank" rel="noopener" href="http://hexo.io">hexo</a>.
+                theme:
+                <a target="_blank" rel="noopener" href="https://github.com/jonashao/hexo-theme-pteris">pteris</a>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    
+</footer>
+
+    
+</footer>
+
+
+    
+<script src="/gitHuang-pepsi.github.io/lib/jquery/dist/jquery.min.js"></script>
+
+
+<script src="/gitHuang-pepsi.github.io/lib/materialize/dist/js/materialize.min.js"></script>
+
+
+<script src="/gitHuang-pepsi.github.io/lib/headroom.js/dist/headroom.min.js"></script>
+
+
+<script src="/gitHuang-pepsi.github.io/lib/headroom.js/dist/jQuery.headroom.min.js"></script>
+
+
+
+
+    
+<script src="/gitHuang-pepsi.github.io/lib/social-share.js/dist/js/share.min.js"></script>
+
+
+
+
+
+<script src="/gitHuang-pepsi.github.io/js/pteris.js"></script>
+
+
+
+    
+<script src="/gitHuang-pepsi.github.io/lib/lightgallery.js/dist/js/lightgallery.min.js"></script>
+
+
+
+
+
+
+
+
+
+</body>
+</html>

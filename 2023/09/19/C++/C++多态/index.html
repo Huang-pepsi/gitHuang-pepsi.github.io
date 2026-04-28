@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en">
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <meta name="theme-color" content= #93b658 >
+    <title>C++多态 | Hexo </title>
+
+    
+        <meta name="keywords" content=","/>
+        
+
+    
+    <meta name="description" content="——————————————————————多态：一个接口，多种方法
+虚表
+如果存在虚函数，那么该类的大小会多一个指针的大小，该指针指向虚函数表。
+编译器把虚函数指针放在最前面
+虚表的每个单元存..."/>
+
+    
+
+    
+
+    
+
+    
+        
+<link rel="stylesheet" href="/gitHuang-pepsi.github.io/lib/social-share.js/dist/css/share.min.css">
+
+    
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/gitHuang-pepsi.github.io/lib/materialize/dist/css/materialize.min.css">
+
+    
+<link rel="stylesheet" href="/gitHuang-pepsi.github.io/lib/animate.css/animate.min.css">
+
+    
+<link rel="stylesheet" href="/gitHuang-pepsi.github.io/css/post/atom-one-light.css">
+
+    
+<link rel="stylesheet" href="/gitHuang-pepsi.github.io/css/pteris.css">
+
+
+
+    
+        
+<link rel="stylesheet" href="/gitHuang-pepsi.github.io/css/post.css">
+
+    
+
+    
+        
+<link rel="stylesheet" href="/gitHuang-pepsi.github.io/lib/lightgallery.js/dist/css/lightgallery.min.css">
+
+    
+
+    
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+<body>
+
+<header>
+    
+        <div class="header-fixed">
+    <nav class="white lime-text lighten-1 " role="navigation">
+        <div class="nav-wrapper container">
+            <div id="logo-container">
+                <a href="/">
+                    
+                    <span class="brand-logo">Hexo</span>
+                </a>
+            </div>
+
+            <ul class="right hide-on-med-and-down">
+                
+            </ul>
+            <a href="#" data-activates="nav-mobile" class="button-collapse">
+                <i class="fa fa-bars green-text"></i></a>
+        </div>
+    </nav>
+</div>
+
+<ul id="nav-mobile" class="side-nav">
+    
+</ul>
+
+
+
+    
+</header>
+
+<main>
+    
+
+    <div id="post">
+        <div class="container">
+            <div id="post-header" class="center">
+                <h1 class="center">C++多态</h1>
+                <span class="post-date center">
+                    <i class="fa fa-calendar"></i>
+                    <time datetime="2023-09-19T14:39:32.000Z">
+                        2023-09-19
+                    </time>
+                </span>
+
+                
+
+                
+                    <div class="post-gallery">
+                        <div id="lightgallery">
+                            
+                        </div>
+                    </div>
+                
+            </div>
+
+            <article>
+                <div class="content">
+                    
+    <p>——————————————————————<br>多态：一个接口，多种方法</p>
+<p>虚表</p>
+<p>如果存在虚函数，那么该类的大小会多一个指针的大小，该指针指向虚函数表。</p>
+<p>编译器把虚函数指针放在最前面</p>
+<p>虚表的每个单元存放虚函数的地址</p>
+<p>C++的多态性</p>
+<p>这就是c++中的多态性，当c++编译器在编译的时候，发现Father类的Say()函数是虚函数，这个时候c++就会采用晚绑定技术，也就是编译时并不确定具体调用的函数，而是在运行时，依据对象的类型来确认调用的是哪一个函数，这种能力就叫做c++的多态性，我们没有在Say()函数前加virtual关键字时，c++编译器就确定了哪个函数被调用，这叫做早期绑定。<br>——————————————————————</p>
+<p>1.在成员函数内可以调用纯虚函数，在构造函数&#x2F;析构函数内部不能使用纯虚函数。</p>
+<p>如果一个类从抽象类派生而来，它必须实现了基类中的所有纯虚函数，才能成为非抽象类。</p>
+<p>2.基类的析构函数为虚函数时</p>
+<img src="1.png" width=65%>
+
+<p>3.虚函数理解：实现多态性，定义父类指针指向子类对象，调用指针时访问的是子类的重载函数。<br><img src="2.png" width=65% div=11></p>
+<p>4.字节对齐+static不影响类大小+虚指针大小为8<br><img src="3.png" width=65%></p>
+<p>5.对于含有虚函数的类，不管有多少个虚函数，只有一个虚指针</p>
+<p>6.Virtual关键字其实质是告知编译系统，被指定为virtual的函数采用动态联编的形式编译。</p>
+<p>函数名联编：将源代码中的函数调用解释为执行特定的函数代码块的过程称为函数名联编。<br>同一个名称的函数有多种，联编就是把调用和具体的实现进行链接映射的操作。</p>
+<p>静态联编：编译阶段就已经知道操作与相应操作的执行之间的关系</p>
+<p>动态联编：运行阶段才知道具体操作与相应执行代码块之间的关系</p>
+<p>例：<br><img src="4.png" width=65%></p>
+<p>此时，编译阶段已确定talk为person类的方法</p>
+<p>理论上编译器当然是可判断的，因为编译器本就能看到所有的代码。</p>
+<p>***但编译器的本质任务是代码的转换，它不会从主函数的第一行执行到最后一行来看每个指针实际指向对象的类型，因为这不是编译期要做的任务</p>
+<p>***即使你自己实现了含有这个功能的编译器，那同样也是编译期不清楚类型。因为这是你的编译器的运行期做的检测，而不是编译期做的检测。编译期当然不清楚</p>
+<p>对于动态联编的理解：对于虚函数，编译器只在运行时判断父类指针指向的子类类型，这是一个标准。</p>
+<p>7.为什么要有纯虚函数？<br>**基类实例化对象不合理<br>派生类需要实现函数</p>
+<p>8.首先，<strong>每个使用虚函数的类（或者从使用虚函数的类派生）都有自己的虚拟表</strong>。该表只是编译器在编译时设置的静态数组。虚拟表包含可由类的对象调用的每个虚函数的一个条目。此表中的每个条目只是一个函数指针，指向该类可访问的派生函数。<br><img src="5.png" width=65%></p>
+<p>9.给每个对象添加一个隐藏成员。隐藏成员中保存了一个指向存放函数地址的数组的指针。这种数组称为虚函数表(virtual function table, vtbl)。虚函数表中存储了为类对象进行声明的虚函数的地址。</p>
+
+
+                </div>
+            </article>
+
+
+            <div class="post-tags center">
+                
+                    <span class="post-tag chip">
+                        <a href="/gitHuang-pepsi.github.io/tags/C/">C++</a>
+                   </span>
+                
+            </div>
+
+
+            <div class="social-share" data-mobile-sites="weibo,qq,qzone,facebook,twitter">
+                <span id="share-to">Share to</span>
+            </div>
+
+            <div class="post-footer">
+                
+                    <a class="left" href="/gitHuang-pepsi.github.io/2023/09/20/%E7%BC%96%E7%A0%81%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/" rel="prev" title="编码知识小结">
+                        <i class="fa fa-arrow-circle-left fa-3x" aria-hidden="true"></i>
+                        <span>  编码知识小结</span>
+                    </a>
+                
+                
+                    <a class="right" href="/gitHuang-pepsi.github.io/2023/09/19/Qt/connect%E5%87%BD%E6%95%B0%E7%9A%84lamda%E8%A1%A8%E8%BE%BE%E5%BC%8F/" rel="next" title="connect函数的lamda表达式">
+                        connect函数的lamda表达式<i
+                                class="fa fa-arrow-circle-right fa-3x "></i>
+                    </a>
+                
+            </div>
+        </div>
+    </div>
+
+
+</main>
+
+<footer>
+    
+        <footer class="page-footer">
+    <div class="footer-copyright">
+        <div class="container">
+            <div>© 2017 Copyright John Doe
+                <span class="right">
+                powered by
+                <a target="_blank" rel="noopener" href="http://hexo.io">hexo</a>.
+                theme:
+                <a target="_blank" rel="noopener" href="https://github.com/jonashao/hexo-theme-pteris">pteris</a>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    
+</footer>
+
+    
+</footer>
+
+
+    
+<script src="/gitHuang-pepsi.github.io/lib/jquery/dist/jquery.min.js"></script>
+
+
+<script src="/gitHuang-pepsi.github.io/lib/materialize/dist/js/materialize.min.js"></script>
+
+
+<script src="/gitHuang-pepsi.github.io/lib/headroom.js/dist/headroom.min.js"></script>
+
+
+<script src="/gitHuang-pepsi.github.io/lib/headroom.js/dist/jQuery.headroom.min.js"></script>
+
+
+
+
+    
+<script src="/gitHuang-pepsi.github.io/lib/social-share.js/dist/js/share.min.js"></script>
+
+
+
+
+
+<script src="/gitHuang-pepsi.github.io/js/pteris.js"></script>
+
+
+
+    
+<script src="/gitHuang-pepsi.github.io/lib/lightgallery.js/dist/js/lightgallery.min.js"></script>
+
+
+
+
+
+
+
+
+
+</body>
+</html>

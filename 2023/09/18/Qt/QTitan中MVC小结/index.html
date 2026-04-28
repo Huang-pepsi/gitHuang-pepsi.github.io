@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <meta name="theme-color" content= #93b658 >
+    <title>QTitan中MVC小结 | Hexo </title>
+
+    
+        <meta name="keywords" content=","/>
+        
+
+    
+    <meta name="description" content="研究了QTitan中的Grid例子，自己也写了自己的demo，写写对其中代码编写的理解。
+MVC是什么？MVC是一种软件设计模式，用于组织和管理应用程序的代码。它代表Model-View-Con..."/>
+
+    
+
+    
+
+    
+
+    
+        
+<link rel="stylesheet" href="/gitHuang-pepsi.github.io/lib/social-share.js/dist/css/share.min.css">
+
+    
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/gitHuang-pepsi.github.io/lib/materialize/dist/css/materialize.min.css">
+
+    
+<link rel="stylesheet" href="/gitHuang-pepsi.github.io/lib/animate.css/animate.min.css">
+
+    
+<link rel="stylesheet" href="/gitHuang-pepsi.github.io/css/post/atom-one-light.css">
+
+    
+<link rel="stylesheet" href="/gitHuang-pepsi.github.io/css/pteris.css">
+
+
+
+    
+        
+<link rel="stylesheet" href="/gitHuang-pepsi.github.io/css/post.css">
+
+    
+
+    
+        
+<link rel="stylesheet" href="/gitHuang-pepsi.github.io/lib/lightgallery.js/dist/css/lightgallery.min.css">
+
+    
+
+    
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+<body>
+
+<header>
+    
+        <div class="header-fixed">
+    <nav class="white lime-text lighten-1 " role="navigation">
+        <div class="nav-wrapper container">
+            <div id="logo-container">
+                <a href="/">
+                    
+                    <span class="brand-logo">Hexo</span>
+                </a>
+            </div>
+
+            <ul class="right hide-on-med-and-down">
+                
+            </ul>
+            <a href="#" data-activates="nav-mobile" class="button-collapse">
+                <i class="fa fa-bars green-text"></i></a>
+        </div>
+    </nav>
+</div>
+
+<ul id="nav-mobile" class="side-nav">
+    
+</ul>
+
+
+
+    
+</header>
+
+<main>
+    
+
+    <div id="post">
+        <div class="container">
+            <div id="post-header" class="center">
+                <h1 class="center">QTitan中MVC小结</h1>
+                <span class="post-date center">
+                    <i class="fa fa-calendar"></i>
+                    <time datetime="2023-09-18T13:40:55.000Z">
+                        2023-09-18
+                    </time>
+                </span>
+
+                
+
+                
+                    <div class="post-gallery">
+                        <div id="lightgallery">
+                            
+                        </div>
+                    </div>
+                
+            </div>
+
+            <article>
+                <div class="content">
+                    
+    <p>研究了QTitan中的Grid例子，自己也写了自己的demo，写写对其中代码编写的理解。</p>
+<h2 id="MVC是什么？"><a href="#MVC是什么？" class="headerlink" title="MVC是什么？"></a>MVC是什么？</h2><p>MVC是一种软件设计模式，用于组织和管理应用程序的代码。它代表Model-View-Controller（模型-视图-控制器）模式，是一种将应用程序分成三个主要组成部分的方法，每个部分都有不同的责任和任务。这种分层方法有助于提高应用程序的可维护性、可扩展性和可重用性。</p>
+<p>简单来说，model相当于是一个在后台负责整理数据逻辑组织方式的一个进程，例如Tree的组织结构，model就为我们把Tree的结点内容、父子节点关系等等给串联起来。controller属于一个中转程序，它是model和view之间的一个桥梁，model有更新会通过controller处理，再通知view进行更新，之前不是很理解为什么要有这一层，因为直接model与view互动就行了呀，感觉这样太麻烦。当然，如果只是很简单的model&amp;view感觉直接传递好像也没什么，但是当model与view互动多了，就会出现很多的问题，例如view的异常操作、view或model要与其他的类进行关联等等，这时你会发现由于model与view之间的耦合度太高导致改动很繁琐。所以呢这也突出了controller的重要性—–解耦，通过这个中转机构model与view耦合度大大下降，对用户的操作也更加简单明了，这也突出了可维护性与可扩展性。view作为与用户直接打交道的界面，能实时显示用户需要的信息，也能接受系列GUI操作。如果你想在其他的view上显示该model的内容，直接调用相应的接口就可以实现，是不是很方便？</p>
+<p><img src="https://picx.zhimg.com/80/v2-a9964761f3e2d74c5aa9147b35d20fa5_720w.png?source=d16d100b"></p>
+<p>左图表示一个视图对应多个模型，表示用户在一个界面上查看不同模块的内容，例如打开某地图app，画面不仅有地图，还有天气等信息。右图表示一个模型对应多个视图，表示用户在多个界面查看同一模块的不同部分，例如火箭升空，地面操作人员在不同的区域查看火箭不同部分的实时信息。</p>
+<h2 id="QTitan中MVC的使用小结"><a href="#QTitan中MVC的使用小结" class="headerlink" title="QTitan中MVC的使用小结"></a>QTitan中MVC的使用小结</h2><h3 id="搭建MVC框架流程"><a href="#搭建MVC框架流程" class="headerlink" title="搭建MVC框架流程"></a>搭建MVC框架流程</h3><p>QTitan中使用TreeGrid类创建一个widget作为view的载体，它可以进行一些layout操作。创建好了TreeGrid，通过调用它的setViewType(GridViewType type)就可以设置自己的view，这里将type设为TreeView，然后执行完这一行代码，QTitan为我们做了很多事（初始化），如创建自己的controller、options（视图相关的选项。关于GridViewOptions类，我通过调用它的setSelectionPolicy使View变成行单选模式，这个类控制view的一些行为。）等。</p>
+<pre><code>m_Tree = new Qtitan::TreeGrid(this);//创建treeGrid
+m_Tree-&gt;setViewType(Qtitan::TreeGrid::TreeView);//设置view类型，初始化view
+m_View = m_Tree-&gt;view&lt;Qtitan::GridTreeView&gt;();//m_view为grid的view的指针
+</code></pre>
+<p>创建好了view，此时调用view的setmodel函数关联自己的model，执行完该函数，view会通过自己的controller对自己原有的model解绑系列信号槽并绑定新的信号槽。</p>
+<pre><code>const QStringList headers({ tr(&quot;column1&quot;), tr(&quot;column2&quot;) });
+m_Model = new TreeModel(headers);//自定义treemodel，设置表头
+m_View-&gt;options().setSelectionPolicy(GridViewOptions::RowSelection);//设置行单选
+m_View-&gt;setModel(m_model);//绑定model
+m_View-&gt;bestFit(Qtitan::FitToHeaderAndContent);//设置自适应数据调整表格大小
+</code></pre>
+<p>到这里，一套MVC就算搭建完成了，后面可以设置具体的model内容与view风格了。</p>
+<h3 id="关于TreeModel（继承QAbstractItemModel）"><a href="#关于TreeModel（继承QAbstractItemModel）" class="headerlink" title="关于TreeModel（继承QAbstractItemModel）"></a>关于TreeModel（继承QAbstractItemModel）</h3><p>QAbstractItemModel是一个数据模型的基类，它定义了数据的组织和访问方式。它是一个抽象类，提供了一些接口与信号槽，通过继承它去实现自己需要的一些功能，这里的TreeModel就是继承QAbstractItemModel实现基本接口并扩展了部分功能。</p>
+<p>Model的分类：</p>
+<p>model有list model、table model与tree model三种类型，list model适合显示具有列表结构的数据集，table model适合显示表格结构的数据集，tree model适合显示树状结构的数据集。其中list model与table model可以看作是特殊的tree model。</p>
+<p><img src="https://picx.zhimg.com/80/v2-49b8b67df194bd1e8a12a2c7d7fe8ec7_720w.png?source=d16d100b"></p>
+<p>QModelIndex类：</p>
+<p>可以看出，若要找到model中某个cell或者item，则需要索引查找，那么就有了QModelIndex，这个索引类提供了行和列的数据，它还在内部定义了一个指针，指向它所属的模型对象，对于list model和table model可以通过行列用来定位item或者cell。但是对于tree model，只知道行列的信息还不能进行定位，此时还需要传递它的父节点的索引。这样，每个最小的单元就会对应一个ModelIndex。Model就可以根据ModelIndex来显示或者设置数据了。</p>
+<p>TreeItem类：</p>
+<p>Model的每一行可以看作一个item，对于每一个item，可以自定义TreeItem类，例如Qt里的QTreeWidgetItem类就是自定义的单独类，item存放自己的数据以及父子节点关系。</p>
+<p>需注意的是初始化TreeModel时在其构造函数是需要创造自己的rootItem的，该item存放model的表头信息，QTitan通过系列调用最后识别这个rootitem的表头信息创建表头。</p>
+<h3 id="关于TreeView（继承自ViewBase）"><a href="#关于TreeView（继承自ViewBase）" class="headerlink" title="关于TreeView（继承自ViewBase）"></a>关于TreeView（继承自ViewBase）</h3><p>View类创造出直接与用户交互的界面，它负责设计界面的框架（如Panel、Filter、Chooser、Menu、Zoom、stroller等）、接受用户的系列操作（单击、双击、拖动、选择多行）等功能，不负责每个数据项的绘制。</p>
+<p>与它相关的类有ViewOptions、ColumnBase等。ViewOptions类用于设置界面的风格、状态等，例如行的多选与单选、界面是否可放大等，它继承自ViewOptionsAbstract，该类绑定自己的View。ColumnBase类用于设置列的系列参数和状态，如表头信息、是否可拖动、大小等，该类绑定自己的View。</p>
+<pre><code>     Qtitan::GridTableColumn* column = (Qtitan::GridTableColumn *)View-&gt;getColumnByModelColumnName(tr(&quot;索引&quot;));//可通过列名得到列的指针
+     m_View-&gt;tableOptions().setRowsQuickSelection(true);//设置checkbox
+     m_View-&gt;options().setSelectionPolicy(GridViewOptions::MultiRowSelection);//设置行多选
+</code></pre>
+<h3 id="关于ModelController"><a href="#关于ModelController" class="headerlink" title="关于ModelController"></a>关于ModelController</h3><p>Controller作为中间层扮演着很重要的的角色。它的职能有很多，包括对view的系列操作的识别和传递信息，对于model的变化的信息传递，对于异常和错误的处理，若没有这个中间层则可能导致model与view交互的众多问题。</p>
+<p>ModelController类主要控制着与model交互的信息，如行列的增删、焦点设置、数据的排列方式等，View类里很多的操作函数底层都是运用相应的Controller进行操作。相关联的类有GridModelDataBinding、GridSelection、GridFilter、GridPersistentRow等。</p>
+<p>GridModelDataBinding类</p>
+<p>此类维护一个列的数据（列号、列名、Role），唯一绑定一个控制器，也可设置数据，但还是用其控制器执行操作。控制器里用一个QVector容器存放所有列的信息。</p>
+<p>GridFilter类</p>
+<p>此类可执行信息的验证、过滤信息等操作，唯一绑定一个控制器， 控制器类里有m_filter，m_relationFilter，m_findFilter这几个私有成员变量。</p>
+<p>GridSummary类</p>
+<p>用于统计列的数据，平均值、和、最大最小值等。</p>
+
+
+                </div>
+            </article>
+
+
+            <div class="post-tags center">
+                
+                    <span class="post-tag chip">
+                        <a href="/gitHuang-pepsi.github.io/tags/Qt/">Qt</a>
+                   </span>
+                
+            </div>
+
+
+            <div class="social-share" data-mobile-sites="weibo,qq,qzone,facebook,twitter">
+                <span id="share-to">Share to</span>
+            </div>
+
+            <div class="post-footer">
+                
+                    <a class="left" href="/gitHuang-pepsi.github.io/2023/09/19/Qt/connect%E5%87%BD%E6%95%B0%E7%9A%84lamda%E8%A1%A8%E8%BE%BE%E5%BC%8F/" rel="prev" title="connect函数的lamda表达式">
+                        <i class="fa fa-arrow-circle-left fa-3x" aria-hidden="true"></i>
+                        <span>  connect函数的lamda表达式</span>
+                    </a>
+                
+                
+                    <a class="right" href="/gitHuang-pepsi.github.io/2023/09/17/Qt/Qt%E7%9A%84Pro%E6%96%87%E4%BB%B6%E5%B0%8F%E7%BB%93/" rel="next" title="Qt的Pro文件小结">
+                        Qt的Pro文件小结<i
+                                class="fa fa-arrow-circle-right fa-3x "></i>
+                    </a>
+                
+            </div>
+        </div>
+    </div>
+
+
+</main>
+
+<footer>
+    
+        <footer class="page-footer">
+    <div class="footer-copyright">
+        <div class="container">
+            <div>© 2017 Copyright John Doe
+                <span class="right">
+                powered by
+                <a target="_blank" rel="noopener" href="http://hexo.io">hexo</a>.
+                theme:
+                <a target="_blank" rel="noopener" href="https://github.com/jonashao/hexo-theme-pteris">pteris</a>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    
+</footer>
+
+    
+</footer>
+
+
+    
+<script src="/gitHuang-pepsi.github.io/lib/jquery/dist/jquery.min.js"></script>
+
+
+<script src="/gitHuang-pepsi.github.io/lib/materialize/dist/js/materialize.min.js"></script>
+
+
+<script src="/gitHuang-pepsi.github.io/lib/headroom.js/dist/headroom.min.js"></script>
+
+
+<script src="/gitHuang-pepsi.github.io/lib/headroom.js/dist/jQuery.headroom.min.js"></script>
+
+
+
+
+    
+<script src="/gitHuang-pepsi.github.io/lib/social-share.js/dist/js/share.min.js"></script>
+
+
+
+
+
+<script src="/gitHuang-pepsi.github.io/js/pteris.js"></script>
+
+
+
+    
+<script src="/gitHuang-pepsi.github.io/lib/lightgallery.js/dist/js/lightgallery.min.js"></script>
+
+
+
+
+
+
+
+
+
+</body>
+</html>

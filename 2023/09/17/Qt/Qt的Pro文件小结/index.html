@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en">
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <meta name="theme-color" content= #93b658 >
+    <title>Qt的Pro文件小结 | Hexo </title>
+
+    
+        <meta name="keywords" content=","/>
+        
+
+    
+    <meta name="description" content="写一些Qt里pro文件相关知识，喜欢的小伙伴可以点点赞哦
+
+QT +&#x3D; 表示项目使用的模块，gui表示使用Qt的GUI部分功能，network表示使用Qt的网络部分功能
+greater..."/>
+
+    
+
+    
+
+    
+
+    
+        
+<link rel="stylesheet" href="/gitHuang-pepsi.github.io/lib/social-share.js/dist/css/share.min.css">
+
+    
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/gitHuang-pepsi.github.io/lib/materialize/dist/css/materialize.min.css">
+
+    
+<link rel="stylesheet" href="/gitHuang-pepsi.github.io/lib/animate.css/animate.min.css">
+
+    
+<link rel="stylesheet" href="/gitHuang-pepsi.github.io/css/post/atom-one-light.css">
+
+    
+<link rel="stylesheet" href="/gitHuang-pepsi.github.io/css/pteris.css">
+
+
+
+    
+        
+<link rel="stylesheet" href="/gitHuang-pepsi.github.io/css/post.css">
+
+    
+
+    
+        
+<link rel="stylesheet" href="/gitHuang-pepsi.github.io/lib/lightgallery.js/dist/css/lightgallery.min.css">
+
+    
+
+    
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+<body>
+
+<header>
+    
+        <div class="header-fixed">
+    <nav class="white lime-text lighten-1 " role="navigation">
+        <div class="nav-wrapper container">
+            <div id="logo-container">
+                <a href="/">
+                    
+                    <span class="brand-logo">Hexo</span>
+                </a>
+            </div>
+
+            <ul class="right hide-on-med-and-down">
+                
+            </ul>
+            <a href="#" data-activates="nav-mobile" class="button-collapse">
+                <i class="fa fa-bars green-text"></i></a>
+        </div>
+    </nav>
+</div>
+
+<ul id="nav-mobile" class="side-nav">
+    
+</ul>
+
+
+
+    
+</header>
+
+<main>
+    
+
+    <div id="post">
+        <div class="container">
+            <div id="post-header" class="center">
+                <h1 class="center">Qt的Pro文件小结</h1>
+                <span class="post-date center">
+                    <i class="fa fa-calendar"></i>
+                    <time datetime="2023-09-17T04:40:34.000Z">
+                        2023-09-17
+                    </time>
+                </span>
+
+                
+
+                
+                    <div class="post-gallery">
+                        <div id="lightgallery">
+                            
+                        </div>
+                    </div>
+                
+            </div>
+
+            <article>
+                <div class="content">
+                    
+    <p>写一些Qt里pro文件相关知识，喜欢的小伙伴可以点点赞哦</p>
+<p><img src="https://picx.zhimg.com/80/v2-aefbe0e7961fbcd68111cd7aad79d013_720w.png?source=d16d100b"></p>
+<p>QT +&#x3D; 表示项目使用的模块，gui表示使用Qt的GUI部分功能，network表示使用Qt的网络部分功能</p>
+<p>greaterThan(QT_MAJOR_VERSION, 4): QT +&#x3D; widgets 表示若目前Qt版本大于4，则增加widgets模块</p>
+<h2 id="CONFIG关键字"><a href="#CONFIG关键字" class="headerlink" title="CONFIG关键字"></a>CONFIG关键字</h2><p>CONFIG +&#x3D; c++17表示该项目将使用 C++17 标准进行编译。</p>
+<p>CONFIG +&#x3D; debug或release或release_and_debug表示指定编译配置是Debug模式还是Release模式。</p>
+<p>CONFIG +&#x3D; console表示项目是一个控制台应用程序</p>
+<p>CONFIG +&#x3D;shared或static表示指定生成动态链接库（shared）还是静态链接库（static）</p>
+<p>CONFIG +&#x3D; thread，支持线程，当 CONFIG 参数包含 qt 的时候，这个是默认支持的</p>
+<h2 id="向项目中添加文件"><a href="#向项目中添加文件" class="headerlink" title="向项目中添加文件"></a>向项目中添加文件</h2><p>SOURCES +&#x3D; 、HEADERS +&#x3D; 、FORMS +&#x3D; 分别表示包含的源文件、头文件、ui文件（注意\表示换行）</p>
+<p>TARGET&#x3D;ssqqss 表示设置生成的应用程序文件名</p>
+<h2 id="目标安装路径INSTALLS"><a href="#目标安装路径INSTALLS" class="headerlink" title="目标安装路径INSTALLS"></a>目标安装路径INSTALLS</h2><p>qnx: target.path &#x3D; &#x2F;tmp&#x2F;$${TARGET}&#x2F;bin: 这一行意味着如果当前目标平台是 QNX（一个实时操作系统），那么目标文件将会被安装到 &#x2F;tmp&#x2F;$${TARGET}&#x2F;bin 目录中。其中，$${TARGET} 会被替换为你在.pro文件中指定的目标名称。</p>
+<p>else: unix:!android: target.path &#x3D; &#x2F;opt&#x2F;$${TARGET}&#x2F;bin: 如果目标平台不是 QNX（因为上面的条件中包括了qnx），并且是一个 Unix-like 系统但不是 Android，那么目标文件将会被安装到 &#x2F;opt&#x2F;$${TARGET}&#x2F;bin 目录中。</p>
+<p>!isEmpty(target.path): INSTALLS +&#x3D; target: 这行的作用是检查 target.path 是否被设置，如果已经设置，就将目标文件添加到安装列表中。也就是说，只有当前目标路径 target.path 不为空时，才会将目标文件添加到安装列表中。</p>
+<p>总的来说，这些行的作用是根据当前的构建平台设置了不同的目标安装路径。在不同平台上，可能会有不同的目录结构和标准，因此可以使用条件语句来根据需要进行设置。</p>
+<h2 id="TEMPLATE关键字"><a href="#TEMPLATE关键字" class="headerlink" title="TEMPLATE关键字"></a>TEMPLATE关键字</h2><p>TEMPLATE 是一个关键字，用于指定项目的类型，生成相应类型的makefile文件。它决定了项目将会生成一个应用程序（可执行文件）还是一个库文件（动态链接库或静态库）。</p>
+<p>TEMPLATE &#x3D; lib表示这个项目将会生成一个库文件（动态链接库或静态库），而不是一个可执行文件。生成lib相关的makefile文件</p>
+<p>TEMPLATE &#x3D; app表示项目是一个应用程序项目，将会生成一个可执行文件。生成app相关的makefile文件</p>
+<p>TEMPLATE &#x3D; subdirs表示项目是一个子项目集合，可以包含多个子项目，每个子项目可以是一个应用程序项目或者库项目。</p>
+<p>TEMPLATE &#x3D; app_bundle表示项目是一个 macOS 应用程序项目，将会生成一个 macOS 应用程序 bundle。</p>
+<h2 id="LIBS关键字"><a href="#LIBS关键字" class="headerlink" title="LIBS关键字"></a>LIBS关键字</h2><p>LIBS +&#x3D; -lsystem_library表示链接系统库</p>
+<p>LIBS +&#x3D; -L&#x2F;path&#x2F;to&#x2F;library -lmylibrary表示链接静态或动态库</p>
+<h2 id="DESTDIR关键字"><a href="#DESTDIR关键字" class="headerlink" title="DESTDIR关键字"></a>DESTDIR关键字</h2><p>DESTDIR &#x3D; $$PWD&#x2F;..&#x2F;..&#x2F;..&#x2F;Bin表示指定编译输出文件的目标目录。通常，DESTDIR 用于指定编译后生成的可执行文件、库文件等的输出路径。</p>
+<ul>
+<li><p>如果没有指定 DESTDIR，默认情况下，Qt 会将编译生成的文件放在项目所在目录的一个子目录中，例如 debug 或者 release。</p>
+</li>
+<li><p>DESTDIR 可以是一个相对路径或者绝对路径。</p>
+</li>
+<li><p>DESTDIR 只影响编译后生成的文件的存放位置，不会影响程序的运行时行为。</p>
+</li>
+</ul>
+<h2 id="INCLUDEPATH-DEPENDPATH关键字"><a href="#INCLUDEPATH-DEPENDPATH关键字" class="headerlink" title="INCLUDEPATH&#x2F;DEPENDPATH关键字"></a>INCLUDEPATH&#x2F;DEPENDPATH关键字</h2><p>INCLUDEPATH 是一个关键字，用于指定头文件的搜索路径。</p>
+<p>DEPENDPATH 用于指定依赖关系的搜索路径。</p>
+<p>INCLUDEPATH 用于编译器，以确保正确包含头文件，而 DEPENDPATH 用于构建系统，以确保正确查找项目的依赖关系。在许多情况下，你需要同时使用它们，以确保构建和编译都能够顺利进行。</p>
+<h2 id="DEFINES-关键字"><a href="#DEFINES-关键字" class="headerlink" title="DEFINES 关键字"></a>DEFINES 关键字</h2><p>DEFINES 是一个关键字，用于指定预处理器宏的定义。</p>
+<p>CONFIG(release, debug|release): DEFINES +&#x3D; RELEASE_STATUS表示如果项目处于 release 模式下，则会定义一个名为 RELEASE_STATUS 的宏。通过使用 DEFINES，你可以在编译过程中通过预处理器来控制代码的行为，从而使得在不同情况下能够灵活地配置和定制你的项目。</p>
+<h2 id="TARGET-关键字"><a href="#TARGET-关键字" class="headerlink" title="TARGET 关键字"></a>TARGET 关键字</h2><p>指定生成的目标可执行文件的名称</p>
+
+
+                </div>
+            </article>
+
+
+            <div class="post-tags center">
+                
+                    <span class="post-tag chip">
+                        <a href="/gitHuang-pepsi.github.io/tags/Qt/">Qt</a>
+                   </span>
+                
+            </div>
+
+
+            <div class="social-share" data-mobile-sites="weibo,qq,qzone,facebook,twitter">
+                <span id="share-to">Share to</span>
+            </div>
+
+            <div class="post-footer">
+                
+                    <a class="left" href="/gitHuang-pepsi.github.io/2023/09/18/Qt/QTitan%E4%B8%ADMVC%E5%B0%8F%E7%BB%93/" rel="prev" title="QTitan中MVC小结">
+                        <i class="fa fa-arrow-circle-left fa-3x" aria-hidden="true"></i>
+                        <span>  QTitan中MVC小结</span>
+                    </a>
+                
+                
+                    <a class="right" href="/gitHuang-pepsi.github.io/2023/09/17/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0%E5%B0%8F%E7%BB%93/" rel="next" title="操作系统学习小结">
+                        操作系统学习小结<i
+                                class="fa fa-arrow-circle-right fa-3x "></i>
+                    </a>
+                
+            </div>
+        </div>
+    </div>
+
+
+</main>
+
+<footer>
+    
+        <footer class="page-footer">
+    <div class="footer-copyright">
+        <div class="container">
+            <div>© 2017 Copyright John Doe
+                <span class="right">
+                powered by
+                <a target="_blank" rel="noopener" href="http://hexo.io">hexo</a>.
+                theme:
+                <a target="_blank" rel="noopener" href="https://github.com/jonashao/hexo-theme-pteris">pteris</a>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    
+</footer>
+
+    
+</footer>
+
+
+    
+<script src="/gitHuang-pepsi.github.io/lib/jquery/dist/jquery.min.js"></script>
+
+
+<script src="/gitHuang-pepsi.github.io/lib/materialize/dist/js/materialize.min.js"></script>
+
+
+<script src="/gitHuang-pepsi.github.io/lib/headroom.js/dist/headroom.min.js"></script>
+
+
+<script src="/gitHuang-pepsi.github.io/lib/headroom.js/dist/jQuery.headroom.min.js"></script>
+
+
+
+
+    
+<script src="/gitHuang-pepsi.github.io/lib/social-share.js/dist/js/share.min.js"></script>
+
+
+
+
+
+<script src="/gitHuang-pepsi.github.io/js/pteris.js"></script>
+
+
+
+    
+<script src="/gitHuang-pepsi.github.io/lib/lightgallery.js/dist/js/lightgallery.min.js"></script>
+
+
+
+
+
+
+
+
+
+</body>
+</html>

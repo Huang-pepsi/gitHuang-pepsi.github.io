@@ -28,12 +28,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
     <meta name="theme-color" content= #93b658 >
-    <title>Hello World | Hexo </title>
+    <title>CICD小结 | Hexo </title>
 
     
+        <meta name="keywords" content=","/>
+        
 
     
-    <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any ..."/>
+    <meta name="description" content="CI（Continuous Integration持续集成）：持续集成发生在每次提交代码时，在局域网内某个主机搭建持续集成环境，对每次提交的代码进行构建、测试，保证了每次提交的代码的稳定性。CD..."/>
 
     
 
@@ -116,11 +118,11 @@
     <div id="post">
         <div class="container">
             <div id="post-header" class="center">
-                <h1 class="center">Hello World</h1>
+                <h1 class="center">CICD小结</h1>
                 <span class="post-date center">
                     <i class="fa fa-calendar"></i>
-                    <time datetime="2026-04-27T11:03:51.429Z">
-                        2026-04-27
+                    <time datetime="2023-10-30T02:57:15.000Z">
+                        2023-10-30
                     </time>
                 </span>
 
@@ -138,19 +140,38 @@
             <article>
                 <div class="content">
                     
-    <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+    <p>CI（Continuous Integration持续集成）：持续集成发生在每次提交代码时，在局域网内某个主机搭建持续集成环境，对每次提交的代码进行构建、测试，保证了每次提交的代码的稳定性。<br>CD（Continuous Delivery持续交付）：在持续集成后，通过脚本自动搭建发布环境，生成可持续交付的可执行文件，缩短发布时间。</p>
+<p>GitLab的CICD流水线概况：</p>
+<ul>
+<li>流水线会运行自动生成的yaml文件</li>
+<li>GitLab-runner的应用，在目标机器下载并为项目注册一个runner，配置相关信息并打开runner，提交代码时会自动触发（可手动）流水线开始运行，runner拉取远程仓库代码并进行脚本相关操作，可修改runner的相关配置信息。runner是cicd的关键。</li>
+</ul>
+<p>YAML文件：<br><img src="Pasted image 20231018160752.png" width=60%></p>
+<ul>
+<li>artifacts关键字用于打包需要的工件  <img src="Pasted image 20231031132658.png" width=60%></li>
+</ul>
+<p>Ruby语法：</p>
+<ul>
+<li>def：用于定义方法（函数）。方法是 Ruby 程序中执行特定任务的代码块，可以在程序中多次调用。<code>def</code> 关键字后面通常跟随方法名，然后是方法的主体，用于定义方法的操作和行为。  <img src="Pasted image 20231031132937.png" width=60%></li>
+<li>权限问题：<img src="Pasted image 20231031130213.png" width=60%></li>
+</ul>
+<p>在目标机器配置环境以及编译可能遇到的问题：</p>
+<ul>
+<li>环境变量：需要添加ruby环境变量等相关的环境变量</li>
+<li>利用runner相关命令确定正常运行</li>
+<li>确定各软件的版本，防止版本问题（差距过大）</li>
+<li>一些文件或文件夹的命名问题，防止出现特殊字符</li>
+<li>确定编译器位置、类型、版本，使用正确的命令执行编译器进行编译</li>
+<li>确定相关库文件是否丢失，是否进行编译</li>
+<li>release版本相关问题</li>
+</ul>
+<p>Qt的几个构建版本：</p>
+<ul>
+<li>debug调试模式，编译后的可执行文件很大，带了很多调试符号信息等，方便开发阶段调试的时候进入具体的堆栈查看值。会打开所有的断言，运行阶段性能差速度慢，可能会有卡顿感觉。</li>
+<li>release发布模式，编译后的可执行文件很小，不带任何调试符号信息，一般用于打包发布程序。由于经过了各种优化，会关闭所有断言，运行阶段性能最好，如果有卡顿那肯定是你的程序问题。</li>
+<li>profile概述模式，编译后的可执行文件比debug小很多比release大一点，带有部分调试符号信息，在debug和release之间取一个平衡，兼顾性能和调试，性能更优但是又方便调试。</li>
+<li>使用Qt5.7版本对应三种模式编译的空白窗体程序大小：debug（1319kb）、release（24kb）、profile（90kb）</li>
+</ul>
 
 
                 </div>
@@ -158,6 +179,10 @@
 
 
             <div class="post-tags center">
+                
+                    <span class="post-tag chip">
+                        <a href="/gitHuang-pepsi.github.io/tags/CICD/">CICD</a>
+                   </span>
                 
             </div>
 
@@ -168,9 +193,14 @@
 
             <div class="post-footer">
                 
+                    <a class="left" href="/gitHuang-pepsi.github.io/2023/10/31/%E4%BB%A3%E7%A0%81Review/" rel="prev" title="代码Review">
+                        <i class="fa fa-arrow-circle-left fa-3x" aria-hidden="true"></i>
+                        <span>  代码Review</span>
+                    </a>
                 
-                    <a class="right" href="/gitHuang-pepsi.github.io/2025/05/11/%E4%BB%8E%E6%BA%90%E6%96%87%E4%BB%B6%E5%88%B0%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6/" rel="next" title="从源文件到可执行文件">
-                        从源文件到可执行文件<i
+                
+                    <a class="right" href="/gitHuang-pepsi.github.io/2023/10/26/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E5%8E%9F%E5%88%99/" rel="next" title="设计模式原则">
+                        设计模式原则<i
                                 class="fa fa-arrow-circle-right fa-3x "></i>
                     </a>
                 

@@ -28,12 +28,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
     <meta name="theme-color" content= #93b658 >
-    <title>Hello World | Hexo </title>
+    <title>关于构造函数QWidget（parent） | Hexo </title>
 
     
+        <meta name="keywords" content=","/>
+        
 
     
-    <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any ..."/>
+    <meta name="description" content="Widget::Widget(QWidget *parent) :QWidget(parent)例子：基类子类
+结果：结论：子类构造函数指定父类的构造函数会调用父类的构造函数，若不指定，则调用父..."/>
 
     
 
@@ -116,11 +119,11 @@
     <div id="post">
         <div class="container">
             <div id="post-header" class="center">
-                <h1 class="center">Hello World</h1>
+                <h1 class="center">关于构造函数QWidget（parent）</h1>
                 <span class="post-date center">
                     <i class="fa fa-calendar"></i>
-                    <time datetime="2026-04-27T11:03:51.429Z">
-                        2026-04-27
+                    <time datetime="2023-11-12T06:02:28.000Z">
+                        2023-11-12
                     </time>
                 </span>
 
@@ -138,19 +141,9 @@
             <article>
                 <div class="content">
                     
-    <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+    <h3 id="Widget-Widget-QWidget-parent-QWidget-parent"><a href="#Widget-Widget-QWidget-parent-QWidget-parent" class="headerlink" title="Widget::Widget(QWidget *parent) :QWidget(parent)"></a>Widget::Widget(QWidget *parent) :QWidget(parent)</h3><p>例子：<br>基类<br><img src="Pasted image 20231110154435.png" width=60%><br>子类<br><img src="Pasted image 20231110154527.png" width=60%></p>
+<p>结果：<br><img src="Pasted image 20231110154545.png" width=60%><br>结论：子类构造函数指定父类的构造函数会调用父类的构造函数，若不指定，则调用父类的默认构造函数</p>
+<p>源码：<br><img src="Pasted image 20231110155342.png" width=60%><br>结论：如果parent参数非空的话，那么该构造函数使用了其父窗口的调色板，并且发送了QChildEvent事件，这会让新的窗口成为parent所指窗口的子窗口，那么当父窗口被删除时，子窗口也会自动的被删除。</p>
 
 
                 </div>
@@ -158,6 +151,10 @@
 
 
             <div class="post-tags center">
+                
+                    <span class="post-tag chip">
+                        <a href="/gitHuang-pepsi.github.io/tags/Qt/">Qt</a>
+                   </span>
                 
             </div>
 
@@ -168,9 +165,14 @@
 
             <div class="post-footer">
                 
+                    <a class="left" href="/gitHuang-pepsi.github.io/2024/01/05/C++/%E5%BC%BA%E5%88%B6%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/" rel="prev" title="强制类型转换">
+                        <i class="fa fa-arrow-circle-left fa-3x" aria-hidden="true"></i>
+                        <span>  强制类型转换</span>
+                    </a>
                 
-                    <a class="right" href="/gitHuang-pepsi.github.io/2025/05/11/%E4%BB%8E%E6%BA%90%E6%96%87%E4%BB%B6%E5%88%B0%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6/" rel="next" title="从源文件到可执行文件">
-                        从源文件到可执行文件<i
+                
+                    <a class="right" href="/gitHuang-pepsi.github.io/2023/11/12/Qt/Qt%E6%96%87%E4%BB%B6%E7%9B%B8%E5%85%B3%EF%BC%88File%EF%BC%89/" rel="next" title="Qt文件相关（File）">
+                        Qt文件相关（File）<i
                                 class="fa fa-arrow-circle-right fa-3x "></i>
                     </a>
                 

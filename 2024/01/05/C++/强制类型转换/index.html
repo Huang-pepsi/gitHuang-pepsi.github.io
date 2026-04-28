@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en">
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <meta name="theme-color" content= #93b658 >
+    <title>强制类型转换 | Hexo </title>
+
+    
+        <meta name="keywords" content=","/>
+        
+
+    
+    <meta name="description" content="static_cast主要有如下几种用法：
+
+用于类层次结构中基类和子类之间指针或引用的转换。进行上行转换（把子类的指针或引用转换成基类表示）是安全的；进行下行转换（把基类指针或引用转换成子类指..."/>
+
+    
+
+    
+
+    
+
+    
+        
+<link rel="stylesheet" href="/gitHuang-pepsi.github.io/lib/social-share.js/dist/css/share.min.css">
+
+    
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/gitHuang-pepsi.github.io/lib/materialize/dist/css/materialize.min.css">
+
+    
+<link rel="stylesheet" href="/gitHuang-pepsi.github.io/lib/animate.css/animate.min.css">
+
+    
+<link rel="stylesheet" href="/gitHuang-pepsi.github.io/css/post/atom-one-light.css">
+
+    
+<link rel="stylesheet" href="/gitHuang-pepsi.github.io/css/pteris.css">
+
+
+
+    
+        
+<link rel="stylesheet" href="/gitHuang-pepsi.github.io/css/post.css">
+
+    
+
+    
+        
+<link rel="stylesheet" href="/gitHuang-pepsi.github.io/lib/lightgallery.js/dist/css/lightgallery.min.css">
+
+    
+
+    
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+<body>
+
+<header>
+    
+        <div class="header-fixed">
+    <nav class="white lime-text lighten-1 " role="navigation">
+        <div class="nav-wrapper container">
+            <div id="logo-container">
+                <a href="/">
+                    
+                    <span class="brand-logo">Hexo</span>
+                </a>
+            </div>
+
+            <ul class="right hide-on-med-and-down">
+                
+            </ul>
+            <a href="#" data-activates="nav-mobile" class="button-collapse">
+                <i class="fa fa-bars green-text"></i></a>
+        </div>
+    </nav>
+</div>
+
+<ul id="nav-mobile" class="side-nav">
+    
+</ul>
+
+
+
+    
+</header>
+
+<main>
+    
+
+    <div id="post">
+        <div class="container">
+            <div id="post-header" class="center">
+                <h1 class="center">强制类型转换</h1>
+                <span class="post-date center">
+                    <i class="fa fa-calendar"></i>
+                    <time datetime="2024-01-05T07:25:25.000Z">
+                        2024-01-05
+                    </time>
+                </span>
+
+                
+
+                
+                    <div class="post-gallery">
+                        <div id="lightgallery">
+                            
+                        </div>
+                    </div>
+                
+            </div>
+
+            <article>
+                <div class="content">
+                    
+    <h2 id="static-cast"><a href="#static-cast" class="headerlink" title="static_cast"></a>static_cast</h2><p>主要有如下几种用法：</p>
+<ul>
+<li>用于类层次结构中基类和子类之间指针或引用的转换。进行上行转换（把子类的指针或引用转换成基类表示）是安全的；进行下行转换（把基类指针或引用转换成子类指针或引用）时，由于没有动态类型检查，所以是不安全的。</li>
+<li>用于基本数据类型之间的转换，如把int转换成char，把int转换成enum。这种转换的安全性也要开发人员来保证。（<strong><code>static_cast</code></strong> 可用于将 int 转换为 <strong><code>char</code></strong>。 但是，得到的 <strong><code>char</code></strong> 可能没有足够的位来保存整个 <strong><code>int</code></strong> 值。 同样，这需要程序员来验证 <strong><code>static_cast</code></strong> 转换的结果是否安全。）</li>
+<li>把void指针转换成目标类型的指针(不安全!!)</li>
+<li>把任何类型的表达式转换成void类型。（这样的转换通常用于避免编译器发出未使用变量的警告。）<br>&#x2F;&#x2F; static_cast_Operator.cpp<br>&#x2F;&#x2F; compile with: &#x2F;LD<br>class B {};</li>
+</ul>
+<p>class D : public B {};</p>
+<p>void f(B* pb, D* pd) {<br>   D* pd2 &#x3D; static_cast&lt;D*&gt;(pb);   &#x2F;&#x2F; Not safe, D can have fields<br>                                   &#x2F;&#x2F; and methods that are not in B.</p>
+<p>   B* pb2 &#x3D; static_cast&lt;B*&gt;(pd);   &#x2F;&#x2F; Safe conversion, D always<br>                                   &#x2F;&#x2F; contains all of B.<br>}</p>
+<h2 id="dynamic-cast"><a href="#dynamic-cast" class="headerlink" title="dynamic_cast:"></a>dynamic_cast:</h2><p>通常在基类和派生类之间转换时使用<br>用法：<strong>dynamic_cast</strong> &lt; type-id &gt; ( expression )  </p>
+<p>说明：该运算符把expression转换成type-id类型的对象。Type-id必须是类的指针、类的引用或者void *；如果type-id是类指针类型，那么expression也必须是一个指针，如果type-id是一个引用，那么expression也必须是一个引用。</p>
+<p>注意点：<br>1.dynamic_cast主要用于类层次间的上行转换和下行转换，还可以用于类之间的交叉转换。  </p>
+<p>2.在类层次间进行上行转换时，dynamic_cast和static_cast的效果是一样的；在进行下行转换时，dynamic_cast具有类型检查的功能，比static_cast更安全。</p>
+<p>3.另外要注意：Base要有虚函数，否则会编译出错；static_cast则没有这个限制。</p>
+<p>void func(Base *pb)<br>{<br>    Derived *pd1 &#x3D; static_cast&lt;Derived *&gt;(pb);  </p>
+<p>    Derived *pd2 &#x3D; dynamic_cast&lt;Derived *&gt;(pb);<br>}<br>如果pb实际指向一个Derived类型的对象，pd1和pd2是一样的，并且对这两个指针执行Derived类型的任何操作都是安全的；<br>如果pb实际指向的是一个Base类型的对象，那么pd1将是一个指向该对象的指针，对它进行Derived类型的操作将是不安全的（如访问m_szName），而pd2将是一个空指针(即0，因为dynamic_cast失败)。</p>
+<h2 id="qobject-cast"><a href="#qobject-cast" class="headerlink" title="qobject_cast"></a>qobject_cast</h2><p>qobject_cast()函数的行为类似于标准C ++ dynamic_cast()<br>QObject *obj &#x3D; new QTimer;          &#x2F;&#x2F; QTimer inherits QObject</p>
+<p>QTimer *timer &#x3D; <strong>qobject_cast</strong>&lt;QTimer *&gt;(obj);</p>
+<p>&#x2F;&#x2F; timer &#x3D;&#x3D; (QObject *)obj</p>
+<p>QAbstractButton *button &#x3D; <strong>qobject_cast</strong>&lt;QAbstractButton *&gt;(obj);</p>
+<p>&#x2F;&#x2F; button &#x3D;&#x3D; 0</p>
+<p>在使用时有两个限制：<br><strong>1# 类型必须继承自QObject。</strong><br><strong>2# 在声明时必须有Q_OBJECT宏。</strong></p>
+
+
+                </div>
+            </article>
+
+
+            <div class="post-tags center">
+                
+                    <span class="post-tag chip">
+                        <a href="/gitHuang-pepsi.github.io/tags/C/">C++</a>
+                   </span>
+                
+            </div>
+
+
+            <div class="social-share" data-mobile-sites="weibo,qq,qzone,facebook,twitter">
+                <span id="share-to">Share to</span>
+            </div>
+
+            <div class="post-footer">
+                
+                    <a class="left" href="/gitHuang-pepsi.github.io/2024/05/11/C++/C++%E7%BB%A7%E6%89%BF/" rel="prev" title="C++继承">
+                        <i class="fa fa-arrow-circle-left fa-3x" aria-hidden="true"></i>
+                        <span>  C++继承</span>
+                    </a>
+                
+                
+                    <a class="right" href="/gitHuang-pepsi.github.io/2023/11/12/Qt/%E5%85%B3%E4%BA%8E%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0QWidget%EF%BC%88parent%EF%BC%89/" rel="next" title="关于构造函数QWidget（parent）">
+                        关于构造函数QWidget（parent）<i
+                                class="fa fa-arrow-circle-right fa-3x "></i>
+                    </a>
+                
+            </div>
+        </div>
+    </div>
+
+
+</main>
+
+<footer>
+    
+        <footer class="page-footer">
+    <div class="footer-copyright">
+        <div class="container">
+            <div>© 2017 Copyright John Doe
+                <span class="right">
+                powered by
+                <a target="_blank" rel="noopener" href="http://hexo.io">hexo</a>.
+                theme:
+                <a target="_blank" rel="noopener" href="https://github.com/jonashao/hexo-theme-pteris">pteris</a>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    
+</footer>
+
+    
+</footer>
+
+
+    
+<script src="/gitHuang-pepsi.github.io/lib/jquery/dist/jquery.min.js"></script>
+
+
+<script src="/gitHuang-pepsi.github.io/lib/materialize/dist/js/materialize.min.js"></script>
+
+
+<script src="/gitHuang-pepsi.github.io/lib/headroom.js/dist/headroom.min.js"></script>
+
+
+<script src="/gitHuang-pepsi.github.io/lib/headroom.js/dist/jQuery.headroom.min.js"></script>
+
+
+
+
+    
+<script src="/gitHuang-pepsi.github.io/lib/social-share.js/dist/js/share.min.js"></script>
+
+
+
+
+
+<script src="/gitHuang-pepsi.github.io/js/pteris.js"></script>
+
+
+
+    
+<script src="/gitHuang-pepsi.github.io/lib/lightgallery.js/dist/js/lightgallery.min.js"></script>
+
+
+
+
+
+
+
+
+
+</body>
+</html>
