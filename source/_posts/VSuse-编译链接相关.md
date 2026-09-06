@@ -1,0 +1,41 @@
+---
+title: VSuse+编译链接相关
+date: 2026-09-06 22:38:09
+tags:
+  - 编译
+---
+编译：
+将h揉进cpp里，翻译成机器代码
+
+链接：
+任务：拼装所有obj+库，即输入.obj+.lib，输出exe文件
+核心：
+1.	找函数实现——去obj、lib、dll中找，lib是打包好的obj集合
+2.	符号解析——符号引用转为真实地址
+3.	地址重定位
+4.	库合并——lib或a拷贝进exe，dll只记录地址
+VS里面的链接需要：
+1.	在链接器里加入附加依赖项，添加lib名称，找指定lib文件
+2.	在VC++目录添加库目录，去库目录寻找lib文件
+问题集合：
+1.	无法找到lib文件——库目录
+2.	无法解析****——1.可能是平台问题（32、64）2.函数声明未实现 3.库版本不一致
+
+汇总：![[Pasted image 20260906224051.png]]
+	 
+关于Q_DECL_EXPORT
+1.	用于生成为库的项目
+2.	符号的实现在 dll 里，lib 只是告诉链接器去哪个 dll 找。
+3.	编译 .dll 时，把这个符号写入 .dll 的导出表 同时自动在 .lib 里记录这个符号的索引
+4.	不加的话外部链接找不到
+Linux的编译工具：
+1.	使用CMake
+a)	CMake简介：生成构建系统的工具。将代码文件、库文件管理，自动生成库文件或者可执行文件。根据CMakeLists.txt生成实际的构建文件，然后调用g++进行编译。
+b)	静态库.a动态库.so
+c)	Cmake本身不编译，只是根据写的 CMakeLists.txt 生成 Makefile，告诉 make 该怎么编译。
+d)	make 是根据 CMakeLists.txt 里指定的文件编译，不是自动识别，make 只编译你在 add_executable 或 add_library 里明确列出的文件，目录下有其他 .cpp 文件但没加进来，就不会编译。
+2.	对比qmake：
+a)	使用qmake解析pro文件生成MakeFile文件，再使用make生成可执行文件
+b)	功能围绕Qt展开+跨平台能力弱+第三方库支持少（比如gRPC在cmake封装好了的函数find_package(gRPC REQUIRED)）
+c)	用于非Qt项目，螺丝刀敲钉子——能用，但不顺手。
+3.	
