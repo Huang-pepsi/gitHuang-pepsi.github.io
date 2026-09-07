@@ -164,7 +164,7 @@
 <p>核心：<br>1.	找函数实现——去obj、lib、dll中找，lib是打包好的obj集合<br>2.	符号解析——符号引用转为真实地址<br>3.	地址重定位<br>4.	库合并——lib或a拷贝进exe，dll只记录地址</p>
 <p>VS里面的链接需要：<br>1.	在链接器里加入附加依赖项，添加lib名称，找指定lib文件<br>2.	在VC++目录添加库目录，去库目录寻找lib文件</p>
 <p>问题集合：<br>1.	无法找到lib文件——库目录<br>2.	无法解析****——1.可能是平台问题（32、64）2.函数声明未实现 3.库版本不一致</p>
-<h2 id="汇总："><a href="#汇总：" class="headerlink" title="汇总："></a>汇总：</h2>  <img src="/gitHuang-pepsi.github.io/gitHuang-pepsi.github/1.png" width="60%">
+<h2 id="汇总："><a href="#汇总：" class="headerlink" title="汇总："></a>汇总：</h2>  <img src="/2026/09/07/编译链接/undefined"  width=60%>
 
 <p>关于Q_DECL_EXPORT<br>1.	用于生成为库的项目<br>2.	符号的实现在 dll 里，lib 只是告诉链接器去哪个 dll 找。<br>3.	编译 .dll 时，把这个符号写入 .dll 的导出表 同时自动在 .lib 里记录这个符号的索引<br>4.	不加的话外部链接找不到</p>
 <h2 id="Linux的编译工具："><a href="#Linux的编译工具：" class="headerlink" title="Linux的编译工具："></a>Linux的编译工具：</h2><ol>
