@@ -377,7 +377,7 @@
   };
 
 $(document).ready(function () {
-    $('#calendar').aCalendar('zh-TW');
+    $('#calendar').aCalendar('zh-CN');
 });
 
 }(jQuery));
