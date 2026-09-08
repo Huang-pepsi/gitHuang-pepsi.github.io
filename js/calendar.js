@@ -376,9 +376,9 @@
     url: '/calendar.json'
   };
 
-$(document).ready(function () {
+  $(document).ready(function () {
     $('#calendar').aCalendar('zh-CN');
-});
+  });
 
 }(jQuery));
 
