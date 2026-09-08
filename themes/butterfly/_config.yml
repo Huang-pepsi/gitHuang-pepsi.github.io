@@ -18,12 +18,11 @@ nav:
   fixed: false
 
 menu:
-  # Home: / || fas fa-home
+  Home: / || fas fa-home
   # List||fas fa-list:
   #   Music: /music/ || fas fa-music
   #   Movie: /movies/ || fas fa-video
-  标签: /tags || fas fa-tags
-  首页: / || fas fa-home
+  tags: /tags
 
 # --------------------------------------
 # Code Blocks Settings
@@ -154,6 +153,7 @@ subtitle:
   enable: true
   # Typewriter Effect
   effect: true
+  loop: true
   # Customize typed.js
   # https://github.com/mattboldt/typed.js/#customization
   typed_option:
@@ -167,6 +167,7 @@ subtitle:
   source: false
   # If you close the typewriter effect, the subtitle will only show the first line of sub
   sub:
+    - 継続は力なり「功不求戾，但求有恒！」
 
 # Article layout on the homepage
 # 1: Cover on the left, info on the right
@@ -293,10 +294,10 @@ aside:
       text: Follow Me
       link: https://github.com/Huang-pepsi
   card_announcement:
-    enable: true
+    enable: false
     content: This is my Blog
   card_recent_post:
-    enable: true
+    enable: false
     # If set 0 will show all
     limit: 5
     # Sort: date / updated
@@ -317,7 +318,7 @@ aside:
     expand: none
     sort_order:
   card_tags:
-    enable: true
+    enable: false
     # If set 0 will show all
     limit: 40
     color: false
@@ -355,7 +356,8 @@ aside:
     # Formal: Month/Day/Year Time or Year/Month/Day Time
     # Leave it empty if you don't enable this feature
     runtime_date:
-
+  card_calendar: 
+    enable: true
 # --------------------------------------
 # Bottom right button
 # --------------------------------------
@@ -859,7 +861,7 @@ canvas_ribbon:
   # The opacity of ribbon (0 ~ 1)
   alpha: 0.6
   zIndex: -1
-  click_to_change: false
+  click_to_change: true
   mobile: false
 
 # Fluttering Ribbon
@@ -889,7 +891,7 @@ fireworks:
 
 # Mouse click effects: Heart symbol
 click_heart:
-  enable: false
+  enable: true
   mobile: false
 
 # Mouse click effects: words
@@ -1061,7 +1063,11 @@ css_prefix: true
 inject:
   head:
     # - <link rel="stylesheet" href="/xxx.css">
+    - <link rel="stylesheet" href="/css/_layout/calendar.styl">
   bottom:
+  - <script src="/js/calendar.js"></script>
+  - <script src="/js/languages.js"></script>
+   # - <script src="https://unpkg.com/chinese-lunar@0.1.4/lib/chinese-lunar.js"></script>
     # - <script src="xxxx"></script>
 
 # CDN Settings
@@ -1106,7 +1112,7 @@ CDN:
     # fancybox:
     # fancybox_css:
     # fireworks:
-    # fontawesome:
+    # fontawesome:https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css
     # gitalk:
     # gitalk_css:
     # giscus:

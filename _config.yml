@@ -93,6 +93,10 @@ include:
 exclude:
 ignore:
 
+marked:
+  prependRoot: true
+  postAsset: true
+
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
