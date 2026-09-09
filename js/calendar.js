@@ -373,7 +373,7 @@
     weekOffset: 0,
     single: true,
     root: '/',
-    url: 'https://huang-pepsi.github.io/gitHuang-pepsi.github.io/calendar.json'
+    url: '/gitHuang-pepsi.github.io/calendar.json'
   };
 	$(document).ready(function () {
 	$("#calendar").aCalendar("zh-CN");
