@@ -1,190 +1,383 @@
-document.addEventListener("DOMContentLoaded", initializeCard);
-document.addEventListener("pjax:complete", initializeCard);
+/**
+ * Calendar - displays a calendar of the current month. Dates appear links if there are posts for that day.
+ */
 
-let year, month, week, date, dates, weekStr, monthStr, asideTime;
+(function($) {
 
-function initializeCard() {
-    cardTimes();
-    cardRefreshTimes();
-}
+  var aCalendar = function(language, options, object) {
+    var now = new Date();
+    var nDay = now.getDate();
+    var nMonth = now.getMonth();
+    var nYear = now.getFullYear();
+    var dDay = nDay;
+    var dMonth = nMonth;
+    var dYear = nYear;
+    var instance = object;
+    var allPosts = null;
+    var months = null;
+    /* Current month's posts */
+    var current = {
+      posts: [],
+      prev: null,
+      next: null
+    };
+    var currentLanguage = 'en';
 
-function getNextFestivalDate() {
-    const now = new Date();
-    const currentYear = now.getFullYear();
+    initLanguage(language);
 
-    // 阳历节日
-    const solarFestivals = [
-        { name: "元旦", month: 1, day: 1 },
-        { name: "清明节", month: 4, day: 4 },
-        { name: "国庆节", month: 10, day: 1 },
-    ];
+    var settings = $.extend({}, $.fn.aCalendar.defaults, typeof calLanguages === 'undefined' ? {} : calLanguages[currentLanguage], options);
 
-    // 农历节日
-    const lunarFestivals = [
-        { name: "春节", month: 1, day: 1 },
-        { name: "端午节", month: 5, day: 5 },
-        { name: "中秋节", month: 8, day: 15 },
-    ];
+    if (settings.root[0] !== '/') {
+      settings.root = '/' + settings.root;
+    }
 
-    const upcoming = [];
+    if (settings.root[settings.root.length - 1] !== '/') {
+      settings.root += '/';
+    }
 
-    // 处理阳历节日（今年 + 明年）
-    [currentYear, currentYear + 1].forEach((y) => {
-        solarFestivals.forEach(({ name, month, day }) => {
-            const festDate = new Date(y, month - 1, day);
-            if (festDate >= now) upcoming.push({ name, date: festDate });
-        });
-    });
+    /**
+     * Initial language.
+     */
+    function initLanguage(key) {
+      if (key && typeof calLanguages !== 'undefined' && calLanguages[key]) {
+        currentLanguage = key;
+      }
+    }
 
-    // 处理农历节日（今年 + 明年）
-    [currentYear, currentYear + 1].forEach((y) => {
-        lunarFestivals.forEach(({ name, month, day }) => {
-            const solarDate = chineseLunar.lunarToSolar(y, month, day);
-            const festDate = new Date(
-                solarDate.getFullYear(),
-                solarDate.getMonth(),
-                solarDate.getDate()
-            );
-            if (festDate >= now) upcoming.push({ name, date: festDate });
-        });
-    });
+    /**
+     * Click handler for next month arrow button.
+     */
+    function nextMonth() {
+      if (dMonth < 11) {
+        dMonth++;
+      } else {
+        dMonth = 0;
+        dYear++;
+      }
 
-    // 排序并返回最近节日
-    if (upcoming.length === 0) return null;
-    return upcoming.sort((a, b) => a.date - b.date)[0];
-}
-
-function cardRefreshTimes() {
-    const e = document.getElementById("card-schedule");
-    if (!e) return;
-
-    const now = new Date();
-    const asideDay = (now - asideTime) / 86400000;
-
-    e.querySelector("#pBar_year").value = asideDay;
-    e.querySelector("#p_span_year").innerText = ((asideDay / 365) * 100).toFixed(1) + "%";
-    e.querySelector(".schedule-r0 .aside-span2 a").innerText = (365 - asideDay).toFixed(0);
-
-    e.querySelector("#pBar_month").value = date;
-    e.querySelector("#pBar_month").max = dates;
-    e.querySelector("#p_span_month").innerText = ((date / dates) * 100).toFixed(1) + "%";
-    e.querySelector(".schedule-r1 .aside-span2 a").innerText = (dates - date);
-
-    const wd = week === 0 ? 7 : week;
-    e.querySelector("#pBar_week").value = wd;
-    e.querySelector("#pBar_week").max = 7;
-    e.querySelector("#p_span_week").innerText = ((wd / 7) * 100).toFixed(1) + "%";
-    e.querySelector(".schedule-r2 .aside-span2 a").innerText = (7 - wd);
-}
-
-function cardTimes() {
-    const getShanghaiMidnight = (date = new Date()) => {
-        const shanghaiStr = date.toLocaleString("zh-CN", { timeZone: "Asia/Shanghai" });
-        return new Date(shanghaiStr.split(" ")[0] + " 00:00:00");
+      draw();
     };
 
-    const shanghaiNow = getShanghaiMidnight();
-    year = shanghaiNow.getFullYear();
-    month = shanghaiNow.getMonth();
-    week = shanghaiNow.getDay();
-    date = shanghaiNow.getDate();
+    /**
+     * Click handler for previous month arrow button.
+     */
+    function previousMonth() {
+      if (dMonth > 0) {
+        dMonth--;
+      } else {
+        dMonth = 11;
+        dYear--;
+      }
 
-    monthStr = `${month + 1}月`;
-    weekStr = ["周日", "周一", "周二", "周三", "周四", "周五", "周六"][week];
-    dates = [
-        31,
-        (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0 ? 29 : 28,
-        31,
-        30,
-        31,
-        30,
-        31,
-        31,
-        30,
-        31,
-        30,
-        31,
-    ][month];
+      draw();
+    };
 
-    asideTime = new Date(`${year}/01/01 00:00:00`);
-
-    // 1月1日为第1天
-    const asideDayNum = Math.ceil((shanghaiNow - asideTime) / 86400000) + 1;
-
-    const weekNum = week - asideDayNum % 7 >= 0 ? Math.ceil(asideDayNum / 7) : Math.ceil(asideDayNum / 7) + 1;
-
-    const nextFestival = getNextFestivalDate();
-    const diffDays = Math.ceil((nextFestival.date - shanghaiNow) / 86400000);
-    const festDateStr = formatDateYMD(nextFestival.date);
-
-    const schedule = document.getElementById("card-schedule");
-    if (schedule) {
-        schedule.querySelector("#schedule-title").innerText = `距离${nextFestival.name}`;
-        schedule.querySelector("#schedule-date").innerText = festDateStr;
-        schedule.querySelector("#schedule-days").innerText = diffDays;
+    /**
+     * Click handler for navigating to a month if there are posts.
+     */
+    function toPostsMonth(date) {
+      if (date) {
+        dYear = date.getFullYear();
+        dMonth = date.getMonth();
+        draw();
+      }
     }
 
-    const calendar = document.getElementById("card-calendar");
-    if (calendar) {
-        calendar.querySelector("#calendar-week").innerHTML = `${year.toString().slice(-2)}年${monthStr}&nbsp;${weekStr}`;
-        calendar.querySelector("#calendar-date").innerHTML = String(date).padStart(2, "0");
-        calendar.querySelector("#calendar-solar").innerHTML = `第${weekNum}周 第${asideDayNum}天`;
-
-        const lunarDate = chineseLunar.solarToLunar(shanghaiNow);
-        const ganzhiYear = chineseLunar.format(lunarDate, "T");
-        const animalYear = chineseLunar.format(lunarDate, "A");
-        const lunarMonthStr = chineseLunar.format(lunarDate, "M");
-        const lunarDayStr = chineseLunar.format(lunarDate, "d");
-
-        calendar.querySelector(
-            "#calendar-lunar"
-        ).innerHTML = `${ganzhiYear}${animalYear}年 ${lunarMonthStr}${lunarDayStr}`;
+    /**
+     * Load current month's posts.
+     */
+    function loadPosts() {
+      if (settings.single) {
+        loadAllPosts();
+      } else {
+        loadPostsByMonth();
+      }
     }
 
-    renderCalendarGrid();
-}
-
-function formatDateYMD(date) {
-    const y = date.getFullYear();
-    const m = String(date.getMonth() + 1).padStart(2, "0");
-    const d = String(date.getDate()).padStart(2, "0");
-    return `${y}-${m}-${d}`;
-}
-
-function renderCalendarGrid() {
-    const container = document.querySelector("#calendar-main");
-    if (!container) return;
-
-    container.innerHTML = "";
-
-    const firstDayOfMonth = new Date(year, month, 1).getDay();
-    const totalCells = firstDayOfMonth + dates;
-    const totalRows = Math.ceil(totalCells / 7);
-
-    let currentDay = 1;
-
-    for (let i = 0; i < totalRows; i++) {
-        const rowDiv = document.createElement("div");
-        rowDiv.className = `calendar-r${i}`;
-
-        for (let j = 0; j < 7; j++) {
-            const cellIndex = i * 7 + j;
-            const cellDiv = document.createElement("div");
-            cellDiv.className = `calendar-d${j}`;
-            const a = document.createElement("a");
-
-            if (cellIndex >= firstDayOfMonth && currentDay <= dates) {
-                a.textContent = currentDay;
-                if (currentDay === date) a.classList.add("now");
-                currentDay++;
-            } else {
-                a.innerHTML = "&nbsp;";
+    /**
+     * Load all month's posts.
+     */
+    function loadAllPosts() {
+      if (settings.url != null && settings.url != '') {
+        if (allPosts === null) {
+          $.ajax({
+            url: settings.url,
+            async: false,
+            success: function(data) {
+              allPosts = data;
+              initMonths(Object.keys(allPosts));
             }
-
-            cellDiv.appendChild(a);
-            rowDiv.appendChild(cellDiv);
+          });
         }
 
-        container.appendChild(rowDiv);
+        if (allPosts !== null) {
+          if (parse()) {
+            current.posts = allPosts[dYear + '-' + (dMonth + 1)];
+          }
+        }
+      }
     }
-}
+
+    /**
+     * Load posts by the month.
+     */
+    function loadPostsByMonth() {
+      if (months === null) {
+        $.ajax({
+          url: settings.root + 'list.json',
+          async: false,
+          success: function(data) {
+            initMonths(data);
+          }
+        });
+      }
+
+      if (parse()) {
+        $.ajax({
+          url: settings.root + dYear + '-' + (dMonth + 1) + '.json',
+          async: false,
+          success: function(data) {
+            current.posts = data;
+          }
+        });
+      }
+    }
+
+    /**
+     * Initial months array.
+     */
+    function initMonths(array) {
+      months = array.map(function(item) {
+        var ym = item.split('-');
+        return new Date(Date.UTC(+ym[0], +ym[1] - 1));
+      });
+    }
+
+    /**
+     * Parse posts month array, and set current.next and current.prev.
+     *
+     * @return if there are posts in this month, return true. ortherwise return false.
+     */
+    function parse() {
+      var time = Date.UTC(dYear, dMonth);
+
+      if (months === null || months.length === 0) {
+        return false;
+      }
+
+      //If no posts in the current month, and before (or after) the current month yet not published articles, then the response to click previous month's (or next month's) event don't need to parse months array
+      if (current.posts.length === 0 && (current.prev === null && current.next !== null && current.next.getTime() > time || current.next === null && current.prev !== null && current.prev.getTime() < time)) {
+        return false;
+      }
+
+      current.posts = [];
+
+      for (var i = 0; i < months.length; i++) {
+        var cTime = months[i].getTime();
+        if (time === cTime) {
+          current.prev = i === 0 ? null : months[i - 1];
+          current.next = i === months.length - 1 ? null : months[i + 1];
+          return true;
+        } else if (time < cTime) {
+          current.prev = i === 0 ? null : months[i - 1];
+          current.next = months[i];
+          break;
+        } else {
+          current.prev = months[i];
+          current.next = null;
+        }
+      }
+
+      return false;
+    }
+
+    /**
+     * Format date object.
+     */
+    function simpleDateFormat(date, fmt) {
+      var o = {
+        'LMM+': settings.months[date.getMonth()],
+        'MM+': date.getMonth() + 1
+      };
+
+      if (/(y+)/.test(fmt)) {
+        fmt = fmt.replace(RegExp.$1, (date.getFullYear() + '').substr(4 - RegExp.$1.length));
+      }
+
+      for (var k in o) {
+        if (new RegExp('(' + k + ')').test(fmt)) {
+          fmt = fmt.replace(RegExp.$1, (k === 'LMM+') ? (o[k]) : (('00' + o[k]).substr(('' + o[k]).length)));
+        }
+      }
+
+      return fmt;
+    }
+
+    /**
+     * Draw calendar.
+     *
+     */
+    function draw() {
+      loadPosts();
+      var dWeekDayOfMonthStart = new Date(dYear, dMonth, 1).getDay() - settings.weekOffset;
+      if (dWeekDayOfMonthStart <= 0) {
+        dWeekDayOfMonthStart = 6 - ((dWeekDayOfMonthStart + 1) * -1);
+      }
+
+      var dLastDayOfMonth = new Date(dYear, dMonth + 1, 0).getDate();
+      var dLastDayOfPreviousMonth = new Date(dYear, dMonth, 0).getDate() - dWeekDayOfMonthStart + 1;
+
+      var cHead = $('<div/>').addClass('cal-head');
+      var cNext = $('<div/>');
+      var cPrevious = $('<div/>');
+      var cTitle = $('<div/>').addClass('cal-title');
+      cPrevious.html(settings.headArrows.previous);
+      cNext.html(settings.headArrows.next);
+      curDate = new Date(Date.UTC(dYear, dMonth));
+      if (current.posts.length === 0) {
+        cTitle.html(simpleDateFormat(curDate, settings.titleFormat));
+      } else {
+        cTitleLink = $('<a/>').attr('href', simpleDateFormat(curDate, settings.titleLinkFormat))
+          .attr('title', simpleDateFormat(curDate, settings.postsMonthTip))
+          .html(simpleDateFormat(curDate, settings.titleFormat));
+        cTitle.html(cTitleLink);
+      }
+
+      cPrevious.on('click', previousMonth);
+      cNext.on('click', nextMonth);
+
+      cHead.append(cPrevious);
+      cHead.append(cTitle);
+      cHead.append(cNext);
+
+      var cBody = $('<table/>').addClass('cal');
+
+      var dayOfWeek = settings.weekOffset;
+      var cWeekHead = $('<thead/>');
+      var cWeekHeadRow = $('<tr/>');
+      for (var i = 0; i < 7; i++) {
+        if (dayOfWeek > 6) {
+          dayOfWeek = 0;
+        }
+
+        var cWeekDay = $('<th/>').attr('scope', 'col').attr('title', settings.dayOfWeek[dayOfWeek]);
+        cWeekDay.html(settings.dayOfWeekShort[dayOfWeek]);
+        cWeekHeadRow.append(cWeekDay);
+        dayOfWeek++;
+      }
+
+      cWeekHead.append(cWeekHeadRow);
+      cBody.append(cWeekHead);
+
+      var cFoot = $('<tfoot/>');
+      var cFootRow = $('<tr/>');
+      var cPrevPosts = $('<td/>').attr('colspan', 3);
+      var cPad = $('<td/>').html('&nbsp;');
+      var cNextPosts = $('<td/>').attr('colspan', 3);
+      if (current.prev) {
+        cPrevPosts.html(settings.footArrows.previous + settings.months[current.prev.getMonth()])
+          .addClass('cal-foot')
+          .attr('title', simpleDateFormat(current.prev, settings.postsMonthTip));
+      }
+
+      if (current.next) {
+        cNextPosts.html(settings.months[current.next.getMonth()] + settings.footArrows.next)
+          .addClass('cal-foot')
+          .attr('title', simpleDateFormat(current.next, settings.postsMonthTip));
+      }
+
+      cPrevPosts.on('click', function() {
+        toPostsMonth(current.prev);
+      });
+
+      cNextPosts.on('click', function() {
+        toPostsMonth(current.next);
+      });
+
+      cFootRow.append(cPrevPosts);
+      cFootRow.append(cPad);
+      cFootRow.append(cNextPosts);
+      cFoot.append(cFootRow);
+
+      var cMainPad = $('<tbody/>');
+      var day = 1;
+      var dayOfNextMonth = 1;
+      for (var i = 0; i < 6; i++) {
+        var cWeek = $('<tr/>');
+        for (var j = 0; j < 7; j++) {
+          var cDay = $('<td/>');
+          if (i * 7 + j < dWeekDayOfMonthStart) {
+            cDay.addClass('cal-gray');
+            cDay.html(dLastDayOfPreviousMonth++);
+          } else if (day <= dLastDayOfMonth) {
+            if (day == dDay && nMonth == dMonth && nYear == dYear) {
+              cDay.addClass('cal-today');
+            }
+
+            var count = {
+              num: 0,
+              keys: []
+            };
+            for (var k = 0; k < current.posts.length; k++) {
+              var d = new Date(Date.parse(current.posts[k].date));
+              if (d.getDate() == day) {
+                count.keys[count.num++] = k;
+              }
+            }
+
+            if (count.num !== 0) {
+              var index = count.keys[0];
+              var cLink = $('<a>').attr('href', current.posts[index].link).attr('title', current.posts[index].title).html(day++);
+              cDay.append(cLink);
+            } else {
+              cDay.html(day++);
+            }
+          } else {
+            cDay.addClass('cal-gray');
+            cDay.html(dayOfNextMonth++);
+          }
+
+          cWeek.append(cDay);
+        }
+
+        cMainPad.append(cWeek);
+      }
+
+      cBody.append(cWeekHead);
+      cBody.append(cFoot);
+      cBody.append(cMainPad);
+
+      $(instance).html(cHead);
+      $(instance).append(cBody);
+    }
+
+    return draw();
+  };
+
+  $.fn.aCalendar = function(Lang, oInit) {
+    return this.each(function() {
+      return aCalendar(Lang, oInit, $(this));
+    });
+  };
+
+  // plugin defaults
+  $.fn.aCalendar.defaults = {
+    months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+    dayOfWeekShort: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
+    dayOfWeek: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+    postsMonthTip: 'Posts published in LMM yyyy',
+    titleFormat: 'yyyy LMM',
+    titleLinkFormat: '/archives/yyyy/MM/',
+    headArrows: {previous: '<span class="cal-prev"></span>', next: '<span class="cal-next"></span>'},
+    footArrows: {previous: '« ', next: ' »'},
+    weekOffset: 0,
+    single: true,
+    root: '/',
+    url: '/gitHuang-pepsi.github.io/calendar.json'
+  };
+	$(document).ready(function () {
+	$("#calendar").aCalendar("zh-CN",{
+	url: '/gitHuang-pepsi.github.io/calendar.json'});
+	});
+
+}(jQuery));
