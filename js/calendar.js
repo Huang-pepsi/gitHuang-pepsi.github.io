@@ -372,8 +372,8 @@
     footArrows: {previous: '« ', next: ' »'},
     weekOffset: 0,
     single: true,
-    root: '/calendar/',
-    url: '/calendar.json'
+    root: '/',
+    url: 'https://huang-pepsi.github.io/gitHuang-pepsi.github.io/calendar.json'
   };
 	$(document).ready(function () {
 	$("#calendar").aCalendar("zh-CN");
