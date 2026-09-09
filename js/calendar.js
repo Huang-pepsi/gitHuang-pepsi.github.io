@@ -376,7 +376,8 @@
     url: '/gitHuang-pepsi.github.io/calendar.json'
   };
 	$(document).ready(function () {
-	$("#calendar").aCalendar("zh-CN");
+	$("#calendar").aCalendar("zh-CN",{
+	url: '/gitHuang-pepsi.github.io/calendar.json'});
 	});
 
 }(jQuery));
