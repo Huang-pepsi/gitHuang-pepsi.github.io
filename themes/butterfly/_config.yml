@@ -319,7 +319,7 @@ aside:
     expand: none
     sort_order:
   card_tags:
-    enable: false
+    enable: true
     # If set 0 will show all
     limit: 40
     color: false
