@@ -64,6 +64,10 @@ index_generator:
   per_page: 10
   order_by: -date
 
+marked:
+  prependRoot: true
+  postAsset: true
+
 # Category & Tag
 default_category: uncategorized
 category_map:
@@ -93,9 +97,6 @@ include:
 exclude:
 ignore:
 
-marked:
-  prependRoot: true
-  postAsset: true
 
 # Extensions
 ## Plugins: https://hexo.io/plugins/

@@ -650,6 +650,10 @@ remark42:
   siteId:
   option:
 
+marked:
+  prependRoot: true
+  postAsset: true
+
 # Artalk
 # https://artalk.js.org/guide/frontend/config.html
 artalk:
