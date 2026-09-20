@@ -1,0 +1,52 @@
+<hr>
+<h2 id="title-编译链接date-2026-09-07-11-32-10tags-编译"><a href="#title-编译链接date-2026-09-07-11-32-10tags-编译" class="headerlink" title="title: 编译链接date: 2026-09-07 11:32:10tags: 编译"></a>title: 编译链接<br>date: 2026-09-07 11:32:10<br>tags: 编译</h2><h1 id="编译："><a href="#编译：" class="headerlink" title="编译："></a>编译：</h1><p>  将h揉进cpp里，翻译成机器代码</p>
+<h1 id="链接："><a href="#链接：" class="headerlink" title="链接："></a>链接：</h1><h2 id="任务：拼装所有obj-库，即输入-obj-lib，输出exe文件"><a href="#任务：拼装所有obj-库，即输入-obj-lib，输出exe文件" class="headerlink" title="任务：拼装所有obj+库，即输入.obj+.lib，输出exe文件"></a>任务：拼装所有obj+库，即输入.obj+.lib，输出exe文件</h2><h2 id="核心："><a href="#核心：" class="headerlink" title="核心："></a>核心：</h2><ol>
+<li>   找函数实现——去obj、lib、dll中找，lib是打包好的obj集合</li>
+<li>   符号解析——符号引用转为真实地址</li>
+<li>   地址重定位</li>
+<li>   库合并——lib或a拷贝进exe，dll只记录地址</li>
+</ol>
+<h2 id="VS里面的链接需要："><a href="#VS里面的链接需要：" class="headerlink" title="VS里面的链接需要："></a>VS里面的链接需要：</h2><ol>
+<li>   在链接器里加入附加依赖项，添加lib名称，找指定lib文件</li>
+<li>   在VC++目录添加库目录，去库目录寻找lib文件</li>
+</ol>
+<h2 id="问题集合："><a href="#问题集合：" class="headerlink" title="问题集合："></a>问题集合：</h2><ol>
+<li>   无法找到lib文件——库目录</li>
+<li>   无法解析****——1.可能是平台问题（32、64）2.函数声明未实现 3.库版本不一致</li>
+</ol>
+<h2 id="汇总："><a href="#汇总：" class="headerlink" title="汇总："></a>汇总：</h2><p>  <img src="/gitHuang-pepsi.github.io/./%E5%9B%BE%E7%89%87/1.png"></p>
+<h2 id="关于Q-DECL-EXPORT"><a href="#关于Q-DECL-EXPORT" class="headerlink" title="关于Q_DECL_EXPORT"></a>关于Q_DECL_EXPORT</h2><ol>
+<li>   用于生成为库的项目</li>
+<li>   符号的实现在 dll 里，lib 只是告诉链接器去哪个 dll 找。</li>
+<li>   编译 .dll 时，把这个符号写入 .dll 的导出表 同时自动在 .lib 里记录这个符号的索引</li>
+<li>   不加的话外部链接找不到</li>
+</ol>
+<h1 id="Make起源与发展时间线"><a href="#Make起源与发展时间线" class="headerlink" title="Make起源与发展时间线"></a>Make起源与发展时间线</h1><p>1977年<br>  Stuart Feldman 在贝尔实验室发明 Make<br>  解决一个问题：<br>    源文件很多时<br>    每次都全部重新编译太慢<br>    只重新编译修改过的文件</p>
+<p>1977年  Make 诞生（贝尔实验室）<br>          ↓<br>1988年  GNU Make 出现<br>        成为 Linux 下的标准构建工具<br>          ↓<br>1990年代 各种 Make 变种出现<br>        BSD Make &#x2F; nmake(微软) &#x2F; pmake<br>        互不兼容，跨平台是噩梦<br>          ↓<br>2000年代 Autotools 出现<br>        .&#x2F;configure &amp;&amp; make &amp;&amp; make install<br>        试图解决跨平台问题<br>        但配置复杂，脚本难以维护<br>          ↓<br>2000年  CMake 诞生<br>        KDE 桌面环境团队开发<br>        为了解决跨平台构建问题<br>          ↓<br>2010年代 CMake 逐渐成为主流<br>        各大IDE开始支持CMake<br>          ↓<br>2016年  CMake 3.x 现代化改造<br>        target_link_libraries 等现代写法<br>        成为事实标准<br>          ↓<br>现在    CMake 是C++项目构建的主流选择</p>
+<h1 id="Makefile-的问题"><a href="#Makefile-的问题" class="headerlink" title="Makefile 的问题"></a>Makefile 的问题</h1><h2 id="1-语法反人类"><a href="#1-语法反人类" class="headerlink" title="1. 语法反人类"></a>1. 语法反人类</h2><h2 id="2-跨平台噩梦"><a href="#2-跨平台噩梦" class="headerlink" title="2. 跨平台噩梦"></a>2. 跨平台噩梦</h2><pre><code># Linux的Makefile
+CC = gcc
+RM = rm -f
+
+# Windows完全不一样
+CC = cl
+RM = del
+
+# 同一个项目
+两个平台要维护两套Makefile
+</code></pre>
+<h2 id="3-大项目难以维护"><a href="#3-大项目难以维护" class="headerlink" title="3. 大项目难以维护"></a>3. 大项目难以维护</h2><h3 id="文件多了之后："><a href="#文件多了之后：" class="headerlink" title="文件多了之后："></a>文件多了之后：</h3><pre><code>依赖关系手动维护
+容易漏掉
+改一个文件不知道影响哪些
+</code></pre>
+<h1 id="现在的构建工具生态"><a href="#现在的构建工具生态" class="headerlink" title="现在的构建工具生态"></a>现在的构建工具生态</h1><p>  CMake        → 最主流，大部分项目在用<br>  Ninja        → 配合CMake使用，编译速度快<br>  Meson        → 新兴，语法更简洁，但生态小<br>  Bazel        → Google出品，超大项目用<br>  xmake        → 国人开发，国内有一定用户<br>  Premake      → 游戏行业有用</p>
+<h1 id="CMake基本语法"><a href="#CMake基本语法" class="headerlink" title="CMake基本语法"></a>CMake基本语法</h1><h3 id="CMakeLists-txt"><a href="#CMakeLists-txt" class="headerlink" title="CMakeLists.txt"></a>CMakeLists.txt</h3><p>cmake_minimum_required(VERSION 3.15)<br>project(MyApp)</p>
+<h2 id="设置C-标准"><a href="#设置C-标准" class="headerlink" title="设置C++标准"></a>设置C++标准</h2><p>set(CMAKE_CXX_STANDARD 17)</p>
+<h2 id="找Qt库"><a href="#找Qt库" class="headerlink" title="找Qt库"></a>找Qt库</h2><p>find_package(Qt5 COMPONENTS Core Widgets REQUIRED)</p>
+<h2 id="源文件"><a href="#源文件" class="headerlink" title="源文件"></a>源文件</h2><p>set(SOURCES<br>    main.cpp<br>    MainWindow.cpp<br>    MyClass.cpp<br>)</p>
+<h2 id="生成可执行文件"><a href="#生成可执行文件" class="headerlink" title="生成可执行文件"></a>生成可执行文件</h2><p>add_executable(MyApp ${SOURCES})</p>
+<h2 id="链接库"><a href="#链接库" class="headerlink" title="链接库"></a>链接库</h2><p>target_link_libraries(MyApp<br>    Qt5::Core<br>    Qt5::Widgets<br>)</p>
+<h2 id="包含目录"><a href="#包含目录" class="headerlink" title="包含目录"></a>包含目录</h2><p>target_include_directories(MyApp PRIVATE<br>    ${CMAKE_SOURCE_DIR}&#x2F;include<br>)</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><ol>
+<li>   使用CMake<br>  a)    CMake简介：生成构建系统的工具。将代码文件、库文件管理，自动生成库文件或者可执行文件。根据CMakeLists.txt生成实际的构建文件，然后调用g++进行编译。<br>  b)    静态库.a动态库.so<br>  c)    Cmake本身不编译，只是根据写的 CMakeLists.txt 生成 Makefile，告诉 make 该怎么编译。<br>  d)    make 是根据 CMakeLists.txt 里指定的文件编译，不是自动识别，make 只编译你在 add_executable 或 add_library 里明确列出的文件，目录下有其他 .cpp 文件但没加进来，就不会编译。</li>
+<li>   对比qmake：<br>  a)    使用qmake解析pro文件生成MakeFile文件，再使用make生成可执行文件<br>  b)    功能围绕Qt展开+跨平台能力弱+第三方库支持少（比如gRPC在cmake封装好了的函数find_package(gRPC REQUIRED)）<br>  c)    用于非Qt项目，螺丝刀敲钉子——能用，但不顺手。</li>
+</ol>
