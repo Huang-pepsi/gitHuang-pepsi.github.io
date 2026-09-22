@@ -321,7 +321,7 @@ aside:
   card_tags:
     enable: true
     # If set 0 will show all
-    limit: 40
+    limit: 0
     color: false
     custom_colors:
     # Order of tags, random/name/length

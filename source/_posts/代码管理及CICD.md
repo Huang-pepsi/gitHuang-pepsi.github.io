@@ -1,9 +1,10 @@
 ---
-title: CICD小结
+title: 代码管理及CICD
 date: 2023-10-30 10:57:15
 tags:
-  - CICD
+  - 代码管理及自动化
 ---
+# CICD
 CI（Continuous Integration持续集成）：持续集成发生在每次提交代码时，在局域网内某个主机搭建持续集成环境，对每次提交的代码进行构建、测试，保证了每次提交的代码的稳定性。
 CD（Continuous Delivery持续交付）：在持续集成后，通过脚本自动搭建发布环境，生成可持续交付的可执行文件，缩短发布时间。
 
@@ -12,14 +13,14 @@ GitLab的CICD流水线概况：
 - GitLab-runner的应用，在目标机器下载并为项目注册一个runner，配置相关信息并打开runner，提交代码时会自动触发（可手动）流水线开始运行，runner拉取远程仓库代码并进行脚本相关操作，可修改runner的相关配置信息。runner是cicd的关键。
 
 YAML文件：
-<img src="Pasted image 20231018160752.png" width=60%>
+![img](Pastedimage20231018160752.png)
 - artifacts关键字用于打包需要的工件
-	<img src="Pasted image 20231031132658.png" width=60%>
+![img](Pastedimage20231031132658.png)
 
 Ruby语法：
 - def：用于定义方法（函数）。方法是 Ruby 程序中执行特定任务的代码块，可以在程序中多次调用。`def` 关键字后面通常跟随方法名，然后是方法的主体，用于定义方法的操作和行为。
-	<img src="Pasted image 20231031132937.png" width=60%>
-- 权限问题：<img src="Pasted image 20231031130213.png" width=60%>
+![img](Pastedimage20231031132937.png)
+- 权限问题：![img](Pastedimage20231031130213.png)
 
 在目标机器配置环境以及编译可能遇到的问题：
 - 环境变量：需要添加ruby环境变量等相关的环境变量
@@ -35,6 +36,10 @@ Qt的几个构建版本：
 - release发布模式，编译后的可执行文件很小，不带任何调试符号信息，一般用于打包发布程序。由于经过了各种优化，会关闭所有断言，运行阶段性能最好，如果有卡顿那肯定是你的程序问题。
 - profile概述模式，编译后的可执行文件比debug小很多比release大一点，带有部分调试符号信息，在debug和release之间取一个平衡，兼顾性能和调试，性能更优但是又方便调试。
 - 使用Qt5.7版本对应三种模式编译的空白窗体程序大小：debug（1319kb）、release（24kb）、profile（90kb）
+
+# SVN与Git
+![alt text](image.png)
+- 区别1.本地有无仓库  2.本地更新是否直接提交
 
 
 
