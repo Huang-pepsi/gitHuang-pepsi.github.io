@@ -1,7 +1,7 @@
 ---
 title: Linux操作常见问题及概念
 date: 2026-02-18 16:13:20
-tags:
+tags: Linux系列
 ---
 
 ## 挂载
