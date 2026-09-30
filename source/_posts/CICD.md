@@ -1,5 +1,5 @@
 ---
-title: 代码管理及CICD
+title: CICD
 date: 2023-10-30 10:57:15
 tags: 工具系列
 ---
@@ -36,9 +36,7 @@ Qt的几个构建版本：
 - profile概述模式，编译后的可执行文件比debug小很多比release大一点，带有部分调试符号信息，在debug和release之间取一个平衡，兼顾性能和调试，性能更优但是又方便调试。
 - 使用Qt5.7版本对应三种模式编译的空白窗体程序大小：debug（1319kb）、release（24kb）、profile（90kb）
 
-# SVN与Git
-![alt text](image.png)
-- 区别1.本地有无仓库  2.本地更新是否直接提交
+
 
 
 

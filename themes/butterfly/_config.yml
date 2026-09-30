@@ -81,7 +81,7 @@ tag_img: true
 tag_per_img:
 
 # Note: category page, not categories page
-category_img:
+category_img: false
 
 # The banner image of category page, you can set the banner image for each category
 # Format:
@@ -123,7 +123,7 @@ post_meta:
     date_type: created
     # Choose: date / relative
     date_format: date
-    categories: true
+    categories: false
     tags: true
     label: true
   post:
@@ -133,7 +133,7 @@ post_meta:
     date_type: both
     # Choose: date / relative
     date_format: date
-    categories: true
+    categories: false 
     tags: true
     label: true
 
@@ -285,7 +285,7 @@ aside:
   display:
     archive: true
     tag: true
-    category: true
+    category: false
   card_author:
     enable: true
     description:
@@ -312,7 +312,7 @@ aside:
     storage: 10
     avatar: true
   card_categories:
-    enable: true
+    enable: false
     # If set 0 will show all
     limit: 8
     # Choose: none / true / false

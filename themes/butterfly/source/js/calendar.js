@@ -367,7 +367,7 @@
     dayOfWeek: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
     postsMonthTip: 'Posts published in LMM yyyy',
     titleFormat: 'yyyy LMM',
-    titleLinkFormat: '/archives/yyyy/MM/',
+    titleLinkFormat: '/gitHuang-pepsi.github.io/archives/yyyy/MM/',
     headArrows: {previous: '<span class="cal-prev"></span>', next: '<span class="cal-next"></span>'},
     footArrows: {previous: '« ', next: ' »'},
     weekOffset: 0,
