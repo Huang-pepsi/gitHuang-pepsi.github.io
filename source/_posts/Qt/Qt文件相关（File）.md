@@ -9,9 +9,8 @@ tags:
 - Qt对于`/`和`\`都可以识别
 
 2.使用QDomDocument读取xml文件的两种方式
-- <img src="Pasted image 20231107135135.png" width=60%>
-- <img src="Pasted image 20231107135147.png" width=60%>
-
+![](Pastedimage20231107135135.png)
+![](Pastedimage20231107135147.png)
 3.用户选择特定文件QFileDialog
 QString QFileDialog::**getOpenFileName**(
 QWidget *parent = nullptr, 
@@ -23,14 +22,14 @@ Options options = 0);
 
 4.QDomElement继承QDomNode
 元素、文本、注释三者有所区别
-<img src="Pasted image 20231107152756.png" width=60%>
-<img src="Pasted image 20231107152020.png" width=60%>为元素结点
-<img src="Pasted image 20231107152037.png" width=60%>为文本节点
-<img src="Pasted image 20231107152807.png" width=60%>为注释结点
+![](Pastedimage20231107152756.png)
+![](Pastedimage20231107152020.png)为元素结点
+![](Pastedimage20231107152037.png)为文本节点
+![](Pastedimage20231107152807.png)为注释结点
 
 5.例：`<span id="hh">文本节点</span>`
-![[Pasted image 20231122142711.png]]
-结果：![[Pasted image 20231122142722.png]]
+![](Pastedimage20231122142711.png)
+结果：![](Pastedimage20231122142722.png)
 
 可看出：
 	- 元素结点可以添加文本节点，结果是为自己的中间的文本赋值
